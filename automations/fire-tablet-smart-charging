@@ -1,0 +1,29 @@
+# -- Two automations for smart charging my Fire Tablet tablet --
+alias: Fire Tablet Charging (on)
+description: ''
+trigger:
+  - platform: numeric_state
+    entity_id: sensor.kitchen_firehd_10_tablet_battery_level
+    below: '20'
+    for: '00:00:30'
+condition: []
+action:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.kitchen_fire_tablet_usb_power
+mode: single
+
+
+alias: Fire Tablet Charging (off)
+description: ''
+trigger:
+  - platform: numeric_state
+    entity_id: sensor.kitchen_firehd_10_tablet_battery_level
+    for: '00:00:30'
+    above: '80'
+condition: []
+action:
+  - service: switch.turn_off
+    target:
+      entity_id: switch.kitchen_fire_tablet_usb_power
+mode: single
