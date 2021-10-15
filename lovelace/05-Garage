@@ -1,0 +1,208 @@
+title: Garage
+path: garage
+icon: mdi:garage-variant
+layout:
+  width: 350
+badges: []
+cards:
+  - type: custom:stack-in-card
+    cards:
+      - type: markdown
+        content: <ha-icon icon="mdi:garage"></ha-icon> Garage
+        style: |
+          ha-card { 
+          font-size: 20px;
+          background: rgba(10, 10, 10, 0);
+          }
+      - type: entities
+        entities:
+          - entity: light.garage_light
+          - entity: binary_sensor.sengled_garage_mandoor
+          - entity: binary_sensor.garage_motion_sensor_aqara
+          - entity: binary_sensor.garage_door_1_sensor
+          - entity: binary_sensor.garage_door_2_sensor
+        style: |
+          ha-card { 
+          background: rgba(0, 0, 0, 0);
+          }
+      - type: entities
+        entities:
+          - type: custom:paper-buttons-row
+            buttons:
+              - entity: binary_sensor.garage_door_1_sensor
+                name: Garage Door 1
+                layout: icon_name
+                icon: mdi:garage
+                tap_action:
+                  action: call-service
+                  service: switch.turn_on
+                  service_data:
+                    entity_id: switch.garage_door_opener_1
+                state_icons:
+                  'off': mdi:garage
+                  'on': mdi:garage-open
+              - entity: binary_sensor.garage_door_2_sensor
+                name: Garage Door 2
+                layout: icon_name
+                icon: mdi:garage
+                tap_action:
+                  action: call-service
+                  service: switch.turn_on
+                  service_data:
+                    entity_id: switch.garage_door_opener_2
+                state_icons:
+                  'off': mdi:garage
+                  'on': mdi:garage-open
+        style: |
+          ha-card { 
+            background: rgba(10, 10, 10, 0)
+          }
+      - type: custom:mini-media-player
+        entity: media_player.garage_speaker
+        toggle_power: false
+        group: true
+        artwork: full-cover
+        info: scroll
+        tts:
+          platform: google_translate
+        style: |
+          ha-card { 
+          background: rgba(0, 0, 0, 0);
+          margin: 30px 0px 30px 0px;
+          }
+      - type: markdown
+        content: <ha-icon icon="mdi:fridge"></ha-icon> Chest Freezer
+        style: |
+          ha-card { 
+          font-size: 20px;
+          background: rgba(10, 10, 10, 0);
+          }
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.freezer_plug_electric_consumed_w
+        line_color: '#bbff94'
+        hours_to_show: 240
+        name: Freezer Power Consumption
+        smoothing: true
+        animate: true
+        style: |
+          ha-card { 
+            background: rgba(10, 10, 10, 0);
+          }
+  - type: vertical-stack
+    cards:
+      - type: custom:stack-in-card
+        cards:
+          - type: markdown
+            content: <ha-icon icon="mdi:car-lifted-pickup"></ha-icon> Silverado
+            style: |
+              ha-card { 
+                font-size: 20px;
+                background-color: rgba(0,0,0,0);
+                box-shadow: none;
+              }
+          - type: entities
+            entities:
+              - entity: sensor.silverado_fuel_level_gal
+                icon: mdi:gas-station
+                name: Fuel Level
+              - entity: sensor.silverado_mpg
+                icon: mdi:speedometer-slow
+                name: Fuel Efficiency
+              - entity: sensor.silverado_trip_mpg
+                icon: mdi:speedometer
+                name: Fuel Efficiency (Trip)
+              - entity: sensor.silverado_dte
+                icon: mdi:alpha-e-box-outline
+                name: DTE
+            style: |
+              ha-card { 
+                background: url("/local/2014_Chevy_Silverado_1500_2.png");
+                background-repeat: no-repeat;
+                background-position: top right;
+                background-size: 60%;
+                background-color: rgba(0,0,0,0);
+                font-size: 15px;
+                --keep-background: true;
+              }
+          - type: custom:button-card
+            name: More Info
+            entity: sensor.silverado_torque
+            icon: none
+            styles:
+              card:
+                - padding: 8%
+              name:
+                - align-self: middle
+                - justify-self: middle
+            style: |
+              ha-card { 
+                font-size: 20px;
+                background-color: rgba(0,0,0,0);
+                height: 10px;
+              }
+      - type: custom:stack-in-card
+        cards:
+          - type: markdown
+            content: <ha-icon icon="mdi:highway"></ha-icon> Trip Data
+            style: |
+              ha-card { 
+                font-size: 20px;
+                background-color: rgba(0,0,0,0);
+                box-shadow: none;
+              }
+          - type: entities
+            entities:
+              - entity: sensor.silverado_trip_distance
+                icon: mdi:ruler
+                name: Trip Distance
+              - entity: sensor.silverado_trip_time
+                icon: mdi:clock
+                name: Trip Duration
+              - entity: sensor.silverado_trip_mpg
+                icon: mdi:speedometer
+                name: Fuel Efficiency (Trip)
+              - entity: sensor.silverado_trip_time_moving
+                icon: mdi:car-lifted-pickup
+                name: Time Moving
+            style: |
+              ha-card { 
+                background-color: rgba(0,0,0,0);
+                box-shadow: none;
+              }
+  - type: custom:vertical-stack-in-card
+    cards:
+      - type: markdown
+        content: <ha-icon icon="mdi:road"></ha-icon> Driving Type
+        style: |
+          ha-card { 
+            font-size: 20px;
+            background-color: rgba(0,0,0,0);
+            box-shadow: none;
+          }
+      - type: custom:apexcharts-card
+        chart_type: radialBar
+        series:
+          - entity: sensor.silverado_pct_highway
+            color: '#ffffff'
+            name: Highway Driving
+            show:
+              legend_value: false
+          - entity: sensor.silverado_pct_city
+            color: '#99bbff'
+            name: City Driving
+            show:
+              legend_value: false
+          - entity: sensor.silverado_pct_idle
+            color: '#bbff94'
+            name: Idle Driving
+            show:
+              legend_value: false
+        header:
+          show: true
+          show_states: true
+        style: |
+          ha-card { 
+            background-color: rgba(0,0,0,0);
+            box-shadow: none;
+          }
