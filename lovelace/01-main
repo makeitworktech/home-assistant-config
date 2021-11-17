@@ -171,7 +171,7 @@
               - type: custom:atomic-calendar-revive
                 enableModeChange: true
                 firstDayOfWeek: 1
-                maxDaysToShow: 2
+                maxDaysToShow: 3
                 entities:
                   - entity: calendar.aaron_s_schedule
                 showDate: true
@@ -188,9 +188,12 @@
                   ha-card { 
                     #background: rgba(0,0,0,0);
                     font-size: 15px;
-                    height: 345px;
                     overflow: hidden;
                   }
+            style: |
+              ha-card { 
+                height: 451px;
+              }
       - type: vertical-stack
         cards:
           - type: custom:stack-in-card
@@ -267,7 +270,7 @@
                     style: |
                       ha-card { 
                         background: rgba(10, 10, 10, 0);
-                        height: 190px;
+                        height: 186px;
                         box-shadow: none;
                        }
             style: |
