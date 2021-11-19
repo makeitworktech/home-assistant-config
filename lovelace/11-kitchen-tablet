@@ -1,0 +1,997 @@
+views:
+  - title: Kitchen Fire HD10
+    path: kitchen-fire-hd10
+    icon: mdi:tablet-dashboard
+    layout:
+      width: 350
+    type: custom:masonry-layout
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: custom:stack-in-card
+            cards:
+              - type: markdown
+                content: <ha-icon icon="mdi:account-multiple"></ha-icon> Family
+                style: |
+                  ha-card { 
+                    font-size: 20px; 
+                  }
+              - type: horizontal-stack
+                mode: horizontal
+                cards:
+                  - type: custom:button-card
+                    entity: person.aaron
+                    aspect_ratio: 4/4
+                    show_name: false
+                    show_icon: false
+                    styles:
+                      card:
+                        - padding: 4%
+                        - background-image: url("/local/Aaron_bitmoji_4.png")
+                        - background-size: 99%
+                        - background-repeat: no-repeat
+                        - background-position: top center
+                        - '--keep-background': 'true'
+                      custom_fields:
+                        location:
+                          - text-transform: capitalize
+                          - position: absolute
+                          - left: 4%
+                          - top: 4%
+                          - color: >-
+                              [[[ if (states["device_tracker.oneplus7"].state ==
+                              "not_home") return "#e45649"; else return
+                              "#50A14F"; ]]]
+                        battery:
+                          - align-self: right
+                          - position: absolute
+                          - right: 4%
+                          - top: 4%
+                          - color: >-
+                              [[[ if
+                              (states["sensor.oneplus7_battery_level"].state <=
+                              30) return "#e45649"; if
+                              (states["sensor.oneplus7_battery_level"].state <=
+                              50) return "#ffa229"; else return "#50A14F"; ]]]
+                    custom_fields:
+                      location: |
+                        [[[
+                          if (states["device_tracker.oneplus7"].state == "not_home")
+                            return `<ha-icon
+                              icon="mdi:home-export-outline"
+                              style="width: 22px; height: 22px;">
+                              </ha-icon>`
+                          if (states["device_tracker.oneplus7"].state == "Work")
+                            return `<ha-icon
+                              icon="mdi:office-building"
+                              style="width: 22px; height: 22px;">
+                              </ha-icon>`
+                          else 
+                            return `<ha-icon
+                              icon="mdi:home"
+                              style="width: 22px; height: 22px;">
+                              </ha-icon>`
+                        ]]]
+                      battery: |
+                        [[[
+                          return `<ha-icon
+                            icon="mdi:battery"
+                            style="width: 20px; height: 20px;"></ha-icon
+                            <span>${states['sensor.oneplus7_battery_level'].state}%</span>`
+                        ]]]
+                    style: |
+                      ha-card { 
+                        background: rgba(10, 10, 10, 0)
+                      }
+                  - type: custom:button-card
+                    entity: person.courtney
+                    aspect_ratio: 4/4
+                    show_name: false
+                    show_icon: false
+                    styles:
+                      card:
+                        - padding: 4%
+                        - background-image: url("/local/Courtney_bitmoji_4.png")
+                        - background-size: 99%
+                        - background-repeat: no-repeat
+                        - background-position: top center
+                        - '--keep-background': 'true'
+                      custom_fields:
+                        location:
+                          - text-transform: capitalize
+                          - position: absolute
+                          - left: 4%
+                          - top: 4%
+                          - color: >-
+                              [[[ if (states["device_tracker.oneplus3t"].state
+                              == "not_home") return "#e45649"; else return
+                              "#50A14F"; ]]]
+                        battery:
+                          - align-self: right
+                          - position: absolute
+                          - right: 4%
+                          - top: 4%
+                          - color: >-
+                              [[[ if
+                              (states["sensor.oneplus3t_battery_level"].state <=
+                              30) return "#e45649"; if
+                              (states["sensor.oneplus3t_battery_level"].state <=
+                              50) return "#ffa229"; else return "#50A14F"; ]]]
+                    custom_fields:
+                      location: |
+                        [[[
+                          if (states["device_tracker.oneplus3t"].state == "not_home")
+                            return `<ha-icon
+                              icon="mdi:home-export-outline"
+                              style="width: 22px; height: 22px;">
+                              </ha-icon>`
+                          if (states["device_tracker.oneplus3t"].state == "Work")
+                            return `<ha-icon
+                              icon="mdi:office-building"
+                              style="width: 22px; height: 22px;">
+                              </ha-icon>`
+                          else 
+                            return `<ha-icon
+                              icon="mdi:home"
+                              style="width: 22px; height: 22px;">
+                              </ha-icon>`
+                        ]]]
+                      battery: |
+                        [[[
+                          return `<ha-icon
+                            icon="mdi:battery"
+                            style="width: 20px; height: 20px;"></ha-icon
+                            <span>${states['sensor.oneplus3t_battery_level'].state}%</span>`
+                        ]]]
+                    style: |
+                      ha-card { 
+                        background: rgba(10, 10, 10, 0)
+                      }
+          - type: custom:swipe-card
+            cards:
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: markdown
+                    content: <ha-icon icon="mdi:lightbulb"></ha-icon> Lighting
+                    style: |
+                      ha-card { 
+                        background: rgba(0,0,0,0);
+                      }
+                  - type: custom:stack-in-card
+                    mode: horizontal
+                    cards:
+                      - type: custom:button-card
+                        entity: light.kitchen_can_lights
+                        tap_action:
+                          action: toggle
+                        hold_action:
+                          action: more-info
+                        state:
+                          - value: 'off'
+                            color: rgba(0,0,0,0.3)
+                        icon: mdi:track-light
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                          }
+                      - type: custom:button-card
+                        entity: light.kitchen_sink_light
+                        tap_action:
+                          action: toggle
+                        icon: mdi:lightbulb
+                        name: Sink Light
+                        state:
+                          - value: 'off'
+                            color: rgba(0,0,0,0.3)
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                          }
+                      - type: custom:button-card
+                        entity: light.kitchen_light_strips
+                        tap_action:
+                          action: toggle
+                        icon: mdi:led-strip-variant
+                        name: Light Strips
+                        state:
+                          - value: 'off'
+                            color: rgba(0,0,0,0.3)
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                          }
+                  - type: custom:stack-in-card
+                    mode: horizontal
+                    cards:
+                      - type: custom:button-card
+                        entity: fan.kitchen_fan_light
+                        state:
+                          - value: 'off'
+                            color: rgba(0,0,0,0.3)
+                        icon: mdi:fan
+                        name: Kitchen Fan
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                            height: 110px;
+                          }
+                      - type: custom:button-card
+                        entity: light.dining_room_light
+                        state:
+                          - value: 'off'
+                            color: rgba(0,0,0,0.3)
+                        icon: mdi:chandelier
+                        name: Dining Room Light
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                            height: 110px;
+                          }
+                    style: |
+                      ha-card { 
+                        height: 110px;
+                      }
+                style: |
+                  ha-card { 
+                    font-size: 25px;
+                  }
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: markdown
+                    content: >-
+                      <ha-icon icon="mdi:lightbulb"></ha-icon> Lighting (Living
+                      Room)
+                    style: |
+                      ha-card { 
+                        background: rgba(0,0,0,0);
+                      }
+                  - type: custom:stack-in-card
+                    mode: horizontal
+                    cards:
+                      - type: custom:button-card
+                        entity: light.living_room_lamps
+                        tap_action:
+                          action: toggle
+                        state:
+                          - value: 'off'
+                            color: rgba(0,0,0,0.3)
+                        icon: mdi:lamp
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                          }
+                      - type: custom:button-card
+                        entity: light.living_room_reading_lights
+                        tap_action:
+                          action: toggle
+                        icon: mdi:track-light
+                        name: Reading Lights
+                        state:
+                          - value: 'off'
+                            color: rgba(0,0,0,0.3)
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                          }
+                      - type: custom:button-card
+                        entity: switch.stairway_light
+                        tap_action:
+                          action: toggle
+                        icon: mdi:ceiling-light
+                        name: Stairway Light
+                        state:
+                          - value: 'off'
+                            color: rgba(0,0,0,0.3)
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                          }
+                  - type: custom:stack-in-card
+                    mode: horizontal
+                    cards:
+                      - type: custom:button-card
+                        entity: light.living_room_lights
+                        state:
+                          - value: 'off'
+                            color: rgba(0,0,0,0.3)
+                        icon: mdi:lightbulb-multiple
+                        name: All Lights
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                            height: 110px;
+                          }
+                    style: |
+                      ha-card { 
+                        height: 110px;
+                      }
+                style: |
+                  ha-card { 
+                    font-size: 25px;
+                  }
+          - type: custom:swipe-card
+            cards:
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: markdown
+                    content: <ha-icon icon="mdi:camera"></ha-icon> Cameras
+                    style: |
+                      ha-card { 
+                        background: rgba(0,0,0,0);
+                      }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:button-card
+                        entity: camera.nursery_camera
+                        icon: mdi:video
+                        name: Nursery
+                        style: |
+                          ha-card {
+                            box-shadow: none;
+                            background: rgba(10, 10, 10, 0);
+                            height: 120px;
+                          }
+                      - type: custom:button-card
+                        entity: camera.corner_bedroom_camera
+                        icon: mdi:video
+                        name: Corner Bedroom
+                        style: |
+                          ha-card {
+                            box-shadow: none;
+                            background: rgba(10, 10, 10, 0);
+                            height: 120px;
+                          }
+                      - type: custom:button-card
+                        entity: camera.driveway_camera
+                        icon: mdi:video
+                        name: Driveway
+                        style: |
+                          ha-card {
+                            box-shadow: none;
+                            background: rgba(10, 10, 10, 0);
+                            height: 120px;
+                          }
+                style: |
+                  ha-card { 
+                    font-size: 25px;
+                  }
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: markdown
+                    content: <ha-icon icon="mdi:camera"></ha-icon> Cameras (cont)
+                    style: |
+                      ha-card { 
+                        background: rgba(0,0,0,0);
+                      }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:button-card
+                        entity: camera.kitchen_fire_hd10_camera
+                        icon: mdi:video
+                        name: Kitchen
+                        style: |
+                          ha-card {
+                            box-shadow: none;
+                            background: rgba(10, 10, 10, 0);
+                            height: 120px;
+                          }
+                      - type: custom:button-card
+                        entity: camera.camera.gs7_camera
+                        icon: mdi:video
+                        name: Office
+                        style: |
+                          ha-card {
+                            box-shadow: none;
+                            background: rgba(10, 10, 10, 0);
+                            height: 120px;
+                          }
+                      - type: custom:button-card
+                        entity: camera.basement_fire_hd10_camera
+                        icon: mdi:video
+                        name: Basement
+                        style: |
+                          ha-card {
+                            box-shadow: none;
+                            background: rgba(10, 10, 10, 0);
+                            height: 120px;
+                          }
+                style: |
+                  ha-card { 
+                    font-size: 25px;
+                  }
+      - type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: markdown
+                    content: <ha-icon icon="mdi:mailbox"></ha-icon> Mailbox
+                    style: |
+                      ha-card { 
+                        background-color: rgba(0,0,0,0);
+                        font-size: 25px;
+                      }
+                  - type: custom:button-card
+                    entity: input_boolean.mail_present
+                    color: white
+                    show_state: false
+                    tap_action:
+                      action: toggle
+                    state:
+                      - value: 'off'
+                        icon: mdi:email-off-outline
+                        name: No Mail
+                        color: rgba(0,0,0,0.3)
+                      - value: 'on'
+                        icon: mdi:email-alert
+                        name: |
+                          [[[
+                            var time_delivered = states["sensor.mailbox_status"].state;
+                            return 'Mail delivered at ' + time_delivered 
+                          ]]]
+                    style: |
+                      ha-card { 
+                        box-shadow: none;
+                        background: rgba(0,0,0,0);
+                        height: 110px;
+                      }
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: markdown
+                    content: <ha-icon icon="mdi:robot-vacuum"></ha-icon> Betsy
+                    style: |
+                      ha-card { 
+                        background-color: rgba(0,0,0,0);
+                        font-size: 25px;
+                      }
+                  - type: custom:button-card
+                    entity: vacuum.betsy
+                    show_name: false
+                    style: |
+                      ha-card { 
+                        box-shadow: none;
+                        background: rgba(0,0,0,0);
+                        height: 110px;
+                      }
+          - type: horizontal-stack
+            cards:
+              - type: custom:swipe-card
+                parameters:
+                  effect: coverflow
+                cards:
+                  - type: custom:vertical-stack-in-card
+                    cards:
+                      - type: markdown
+                        content: <ha-icon icon="mdi:clock"></ha-icon> Time
+                        style: |
+                          ha-card { 
+                            background-color: rgba(0,0,0,0);
+                            font-size: 25px;
+                          }
+                      - type: custom:digital-clock
+                        style: |
+                          ha-card {
+                            box-shadow: none;
+                            background: rgba(10, 10, 10, 0);
+                            font-size: 30px;
+                            height: 190px;
+                          }
+                  - type: custom:vertical-stack-in-card
+                    cards:
+                      - type: markdown
+                        content: >-
+                          <ha-icon icon="mdi:white-balance-sunny"></ha-icon>
+                          Weather  -  {{
+                                      state_attr('weather.home','temperature') }} °F
+                        style: |
+                          ha-card { 
+                            background: rgba(10, 10, 10, 0);
+                            font-size: 25px;
+                          }
+                      - type: custom:weather-card
+                        entity: weather.home
+                        number_of_forecasts: '5'
+                        current: false
+                        hourly_forecast: false
+                        details: false
+                        style: |
+                          ha-card { 
+                            background: rgba(10, 10, 10, 0);
+                            height: 152px;
+                            box-shadow: none;
+                            font-size: 20px;
+                           }
+          - type: custom:swipe-card
+            parameters:
+              effect: coverflow
+            cards:
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: markdown
+                    content: <ha-icon icon="mdi:amazon-alexa"></ha-icon> Announcements
+                    style: |
+                      ha-card { 
+                        background: rgba(0,0,0,0);
+                      }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:button-card
+                        tap_action:
+                          action: toggle
+                        entity: script.announcement_time_for_supper
+                        name: Supper Time!
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                            box-shadow: none;
+                            height: 120px;
+                          }
+                      - type: custom:button-card
+                        tap_action:
+                          action: call-service
+                          service: notify.alexa_media_basement_echo_dot
+                          service_data:
+                            message: Kids, it is time for bed. Please come upstairs!
+                            data:
+                              type: tts
+                          target: {}
+                        icon: mdi:bed
+                        name: Bedtime
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                            box-shadow: none;
+                            height: 120px;
+                          }
+                      - type: custom:button-card
+                        tap_action:
+                          action: call-service
+                          service: notify.alexa_media_basement_echo_dot
+                          service_data:
+                            message: Time for school.
+                            data:
+                              type: tts
+                          target: {}
+                        icon: mdi:bell
+                        name: Time for School
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                            box-shadow: none;
+                            height: 120px;
+                          }
+                  - type: custom:stack-in-card
+                    mode: horizontal
+                    cards:
+                      - type: custom:button-card
+                        tap_action:
+                          action: toggle
+                        entity: script.announcement_time_for_lunch
+                        name: Lunch Time!
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                            box-shadow: none;
+                            height: 120px;
+                          }
+                      - type: custom:button-card
+                        tap_action:
+                          action: call-service
+                          service: notify.alexa_media_basement_echo_dot
+                          service_data:
+                            message: That's the last episode! Please come up.
+                            data:
+                              type: tts
+                          target: {}
+                        icon: mdi:video
+                        name: Last Episode
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                            box-shadow: none;
+                            height: 120px;
+                          }
+                      - type: custom:button-card
+                        tap_action:
+                          action: call-service
+                          service: notify.alexa_media_basement_echo_dot
+                          service_data:
+                            message: Please come upstairs.
+                            data:
+                              type: tts
+                          target: {}
+                        icon: mdi:stairs
+                        name: Come Upstairs
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                            box-shadow: none;
+                            height: 120px;
+                          }
+                style: |
+                  ha-card { 
+                    font-size: 25px;
+                  }
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: markdown
+                    content: >-
+                      <ha-icon icon="mdi:amazon-alexa"></ha-icon> Custom
+                      Announcements
+                    style: |
+                      ha-card { 
+                        background: rgba(0,0,0,0);
+                        font-size: 25px;
+                      }
+                  - type: custom:mini-media-player
+                    icon: mdi:amazon-alexa
+                    toggle_power: false
+                    entity: media_player.office_echo_dot
+                    group: true
+                    tts:
+                      platform: alexa
+                      type: tts
+                    style: |
+                      ha-card { 
+                        margin: 0px 0px 40px 0px;
+                      }
+                  - type: custom:mini-media-player
+                    icon: mdi:amazon-alexa
+                    toggle_power: false
+                    entity: media_player.basement_echo_dot
+                    group: true
+                    tts:
+                      platform: alexa
+                      type: tts
+                    style: |
+                      ha-card { 
+                        margin: 0px 0px 40px 0px;
+                      }
+      - type: vertical-stack
+        cards:
+          - type: custom:swipe-card
+            parameters:
+              effect: coverflow
+            cards:
+              - type: custom:stack-in-card
+                mode: vertical
+                cards:
+                  - type: markdown
+                    content: <ha-icon icon="mdi:thermostat"></ha-icon> Climate Control
+                    style: |
+                      ha-card { 
+                        background: url("/local/google-nest-logo-transparent-png.png");
+                        background-repeat: no-repeat;
+                        background-position: right;
+                        background-size: 15%;
+                        background-color: rgba(0,0,0,0);
+                        font-size: 25px;
+                        box-shadow: none;
+                        margin: 0px 10px 0px 0px;
+                      }
+                  - type: custom:simple-thermostat
+                    entity: climate.living_room
+                    header:
+                      name: Living Room Thermostat
+                      icon: null
+                    decimals: 0
+                    step_size: 1
+                    control: false
+                    layout:
+                      step: row
+                    style: |
+                      ha-card { 
+                        --st-font-size-title: 18px;
+                        background: rgba(10, 10, 10, 0);
+                        box-shadow: none;
+                      }
+                  - type: custom:simple-thermostat
+                    entity: climate.master_bedroom
+                    header:
+                      name: Master Bedroom Thermostat
+                      icon: null
+                    decimals: 0
+                    step_size: 1
+                    control: false
+                    layout:
+                      step: row
+                    style: |
+                      ha-card { 
+                        --st-font-size-title: 18px;
+                        background: rgba(10, 10, 10, 0);
+                        box-shadow: none;
+                        margin: 0px 0px 16px 0px; 
+                      }
+                  - type: custom:simple-thermostat
+                    entity: climate.basement
+                    header:
+                      name: Basement Thermostat
+                      icon: null
+                    decimals: 0
+                    step_size: 1
+                    control: false
+                    layout:
+                      step: row
+                    style: |
+                      ha-card { 
+                        --st-font-size-title: 18px;
+                        background: rgba(10, 10, 10, 0);
+                        box-shadow: none;
+                        margin: 0px 0px 30px 0px; 
+                      }
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mini-graph-card
+                        entities:
+                          - sensor.living_room_temperature_round
+                        line_color: white
+                        name: Living Rm. Temp
+                        animate: true
+                        style: |
+                          ha-card { 
+                            background: rgba(10, 10, 10, 0);
+                            font-size: 20px;
+                            box-shadow: none;
+                            margin: 0px 5px 0px 0px; 
+                          }
+                      - type: custom:mini-graph-card
+                        entities:
+                          - sensor.master_bedroom_temperature_round
+                        line_color: white
+                        name: Bedroom Temp
+                        animate: true
+                        style: |
+                          ha-card { 
+                            background: rgba(0, 0, 0, 0);
+                            font-size: 20px;
+                            box-shadow: none;
+                            margin: 0px 0px 0px 5px; 
+                          }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mini-graph-card
+                        entities:
+                          - sensor.basement_temperature_round
+                        line_color: white
+                        name: Basement Temp
+                        animate: true
+                        style: |
+                          ha-card { 
+                            background: rgba(0, 0, 0, 0);
+                            font-size: 20px;
+                            box-shadow: none;
+                            margin: 0px 5px 0px 0px; 
+                          }
+                      - type: custom:mini-graph-card
+                        entities:
+                          - sensor.office_smartthings_button_temperature
+                        line_color: white
+                        name: Office Temp
+                        animate: true
+                        style: |
+                          ha-card { 
+                            background: rgba(0, 0, 0, 0);
+                            font-size: 20px;
+                            box-shadow: none;
+                            margin: 0px 0px 0px 5px; 
+                          }
+                  - type: horizontal-stack
+                    cards:
+                      - type: custom:mini-graph-card
+                        entities:
+                          - sensor.blink_front_door_temperature
+                        line_color: white
+                        name: Outside Front
+                        animate: true
+                        style: |
+                          ha-card { 
+                            background: rgba(0, 0, 0, 0);
+                            font-size: 20px;
+                            box-shadow: none;
+                            margin: 0px 5px 0px 0px; 
+                          }
+                      - type: custom:mini-graph-card
+                        entities:
+                          - sensor.blink_back_temperature
+                        line_color: white
+                        name: Outside Back
+                        animate: true
+                        style: |
+                          ha-card { 
+                            background: rgba(0, 0, 0, 0);
+                            font-size: 20px;
+                            box-shadow: none;
+                            margin: 0px 0px 0px 5px; 
+                          }
+          - type: custom:swipe-card
+            parameters:
+              effect: coverflow
+            cards:
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: markdown
+                    content: <ha-icon icon="mdi:shield"></ha-icon> Security
+                    style: |
+                      ha-card {
+                        font-size: 25px;
+                        box-shadow: none;
+                        background: rgba(10, 10, 10, 0);
+                      }
+                  - type: custom:stack-in-card
+                    mode: horizontal
+                    cards:
+                      - type: custom:button-card
+                        name: Baby Gate
+                        entity: binary_sensor.smartthings_multipurpose_sensor_contact
+                        state:
+                          - value: 'on'
+                            icon: mdi:door-open
+                            color: red
+                          - value: 'off'
+                            icon: mdi:door
+                      - type: custom:button-card
+                        name: Front
+                        entity: binary_sensor.front_door_sensor
+                        state:
+                          - value: 'on'
+                            icon: mdi:door-open
+                            color: red
+                          - value: 'off'
+                            icon: mdi:door
+                          - value: unavailable
+                            icon: mdi:door
+                            color: white
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                          }
+                      - type: custom:button-card
+                        name: Back
+                        entity: binary_sensor.back_door_sensor
+                        state:
+                          - value: 'on'
+                            icon: mdi:door-open
+                            color: red
+                          - value: 'off'
+                            icon: mdi:door
+                          - value: unavailable
+                            icon: mdi:door
+                            color: white
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                          }
+                      - type: custom:button-card
+                        name: Deck
+                        entity: binary_sensor.sengled_deck_door
+                        state:
+                          - value: 'on'
+                            icon: mdi:door-open
+                            color: red
+                          - value: 'off'
+                            icon: mdi:door
+                          - value: unavailable
+                            icon: mdi:door
+                            color: white
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                          }
+                      - type: custom:button-card
+                        name: Garage
+                        entity: binary_sensor.sengled_garage_mandoor
+                        state:
+                          - value: 'on'
+                            icon: mdi:door-open
+                            color: red
+                          - value: 'off'
+                            icon: mdi:door
+                          - value: unavailable
+                            icon: mdi:door
+                            color: rgba(0,0,0,0.3)
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                          }
+                    style: |
+                      ha-card {
+                        box-shadow: none;
+                        background: rgba(10, 10, 10, 0);
+                        font-size: 10px;
+                        height: 90px;
+                      }
+                  - type: custom:stack-in-card
+                    mode: horizontal
+                    cards:
+                      - type: custom:button-card
+                        entity: binary_sensor.garage_door_1_sensor
+                        name: Garage Door 1
+                        icon: mdi:garage
+                        tap_action:
+                          action: call-service
+                          service: switch.turn_on
+                          service_data:
+                            entity_id: switch.garage_door_opener_1
+                        state:
+                          - value: closed
+                            icon: mdi:garage
+                          - value: open
+                            icon: mdi:garage-open
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                            height: 90px;
+                          }
+                      - type: custom:button-card
+                        entity: binary_sensor.garage_door_2_sensor
+                        name: Garage Door 2
+                        icon: mdi:garage
+                        tap_action:
+                          action: call-service
+                          service: switch.turn_on
+                          service_data:
+                            entity_id: switch.garage_door_opener_2
+                        state:
+                          - value: closed
+                            icon: mdi:garage
+                          - value: open
+                            icon: mdi:garage-open
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                            height: 90px;
+                          }
+                    style: |
+                      ha-card {
+                        box-shadow: none;
+                        background: rgba(10, 10, 10, 0);
+                        font-size: 10px;
+                        height: 90px;
+                      }
+              - type: custom:vertical-stack-in-card
+                cards:
+                  - type: markdown
+                    content: <ha-icon icon="mdi:shield"></ha-icon> Security
+                    style: |
+                      ha-card {
+                        font-size: 25px;
+                        box-shadow: none;
+                        background: rgba(10, 10, 10, 0);
+                      }
+                  - type: custom:stack-in-card
+                    mode: horizontal
+                    cards:
+                      - type: custom:button-card
+                        name: Alexa Guard
+                        entity: alarm_control_panel.alexa_guard_a7ffa
+                        state:
+                          - value: armed
+                            icon: mdi:shield-check
+                            color: red
+                          - value: disarmed
+                            icon: mdi:shield-off
+                            color: '#03fcca'
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                            height: 90px;
+                          }
+                      - type: custom:button-card
+                        name: Blink
+                        entity: alarm_control_panel.blink_home
+                        state:
+                          - value: armed_away
+                            icon: mdi:shield-check
+                            color: red
+                          - value: disarmed
+                            icon: mdi:shield-off
+                            color: '#03fcca'
+                        style: |
+                          ha-card { 
+                            background: rgba(0,0,0,0);
+                            height: 90px;
+                          }
