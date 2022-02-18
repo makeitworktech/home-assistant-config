@@ -1,0 +1,337 @@
+# ==== Sensor Rounding ============
+  - platform: template
+    sensors: 
+      basement_temperature_round:
+        friendly_name: "Basement Temperature Rounded"
+        unit_of_measurement: '°F'
+        value_template: "{{ states('sensor.basement_temperature')|int }}"
+      living_room_temperature_round:
+        friendly_name: "Living Room Temperature Rounded"
+        unit_of_measurement: '°F'
+        value_template: "{{ states('sensor.living_room_temperature')|int }}"
+      master_bedroom_temperature_round:
+        friendly_name: "Master Bedroom Temperature Rounded"
+        unit_of_measurement: '°F'
+        value_template: "{{ states('sensor.master_bedroom_temperature')|int }}"    
+# ================================= 
+
+
+
+# ==== Google WiFi Integration =====   
+  - platform: google_wifi
+# =================================== 
+
+
+# ==== Fully Kiosk Browser =======
+  - platform: rest
+    name: GS7
+    json_attributes:
+      - batteryLevel
+      - kioskMode
+      - screenBrightness
+      - motionDetectorState
+      - maintenanceMode
+      - appFreeMemory
+      - appUsedMemory
+      - totalFreeMemory
+      - totalUsedMemory
+      - hostname4
+      - ip4
+      - mac
+      - locationLatitude
+      - locationLongitude
+      - locationAltitude
+      - startUrl
+      - currentPage
+    resource: !secret fully_kiosk_gs7_resource
+    value_template: '{{ value_json.isScreenOn }}'
+# ===================================    
+
+
+
+#  ==== Torque Pro Sensors ===============
+# ---- Initial Sensor
+  - platform: mqtt
+    name: "Silverado Torque"
+    state_topic: "devices/silverado/torque"
+    value_template: "{{ state_attr('sensor.silverado_torque','GPS Time') }}"
+    json_attributes_topic: "devices/silverado/torque"
+# ---- Attribute Sensors    
+  - platform: template
+    sensors:
+      silverado_mpg:
+        friendly_name: "Silverado Miles per Gallon"
+        unit_of_measurement: 'mpg'
+        value_template: "{{ state_attr('sensor.silverado_torque', 'Miles Per Gallon(Long Term Average)(mpg)') | round(1) }}"
+
+  - platform: template
+    sensors:
+      silverado_mpg_instant:
+        friendly_name: "Silverado Miles per Gallon (Instant)"
+        unit_of_measurement: 'mpg'
+        value_template: "{{ state_attr('sensor.silverado_torque', 'Miles Per Gallon(Instant)(mpg)') | round(1) }}"
+        
+    # Fuel Flow Rate Sensor 
+  - platform: template
+    sensors:
+      silverado_fuel_gpm:
+        friendly_name: "Silverado Fuel Flow Rate (gal/min)"
+        unit_of_measurement: 'gpm'
+        value_template: "{{ state_attr('sensor.silverado_torque', 'Fuel flow rate/minute(gal/min)') | round(1) }}"
+        
+  - platform: template
+    sensors:
+      silverado_fuel_gph:
+        friendly_name: "Silverado Fuel Flow Rate (gal/hr)"
+        unit_of_measurement: 'gpm'
+        value_template: "{{ state_attr('sensor.silverado_torque', 'Fuel flow rate/hour(gal/hr)') | round(1) }}"
+        
+  - platform: template
+    sensors:
+      silverado_speed_obd:
+        friendly_name: "Silverado OBD Speed (mph)"
+        unit_of_measurement: 'gallons'
+        value_template: "{{ state_attr('sensor.silverado_torque', 'Speed (OBD)(mph)') | round(1) }}"
+        
+  - platform: template
+    sensors:
+      silverado_mpg_calc:
+        friendly_name: "Silverado Miles per Gallon (Calculated)"
+        unit_of_measurement: 'mpg'
+        value_template: "{{ ((states('sensor.silverado_speed_obd') | float) / (states('sensor.silverado_fuel_gph') | float)) | round(1) }}"
+
+# ---- Other ----
+  - platform: template
+    sensors:
+      silverado_fuel_level:
+        friendly_name: "Silverado Fuel Level (from ECU)"
+        unit_of_measurement: '%'
+        value_template: "{{ state_attr('sensor.silverado_torque', 'Fuel Level (From Engine ECU)(%)') | round(1) }}"
+
+  - platform: template
+    sensors:
+      silverado_fuel_level_gal:
+        friendly_name: "Silverado Fuel Level (gal)"
+        unit_of_measurement: 'gallons'
+        value_template: "{{ (((states('sensor.silverado_fuel_level') | float) / 100) * 26) | round(1) }}"
+
+  - platform: template
+    sensors:
+      silverado_dte:
+        friendly_name: "Silverado Distance to Empty"
+        unit_of_measurement: 'miles'
+        value_template: "{{ state_attr('sensor.silverado_torque', 'Distance to empty (Estimated)(miles)') | round(1) }}"     
+        
+  - platform: template
+    sensors:
+      silverado_pct_highway:
+        friendly_name: "Silverado Percentage of Highway Driving"
+        unit_of_measurement: '%'
+        value_template: "{{ state_attr('sensor.silverado_torque', 'Percentage of Highway driving(%)') | round(1) }}"   
+
+  - platform: template
+    sensors:
+      silverado_pct_city:
+        friendly_name: "Silverado Percentage of City Driving"
+        unit_of_measurement: '%'
+        value_template: "{{ state_attr('sensor.silverado_torque', 'Percentage of City driving(%)') | round(1) }}"   
+
+  - platform: template
+    sensors:
+      silverado_pct_idle:
+        friendly_name: "Silverado Percentage of Idle Driving"
+        unit_of_measurement: '%'
+        value_template: "{{ state_attr('sensor.silverado_torque', 'Percentage of Idle driving(%)') | round(1) }}"
+# ---- Trip Data --------
+
+  - platform: template
+    sensors:
+      silverado_trip_mpg:
+        friendly_name: "Silverado Miles per Gallon (Trip)"
+        unit_of_measurement: 'mpg'
+        value_template: "{{ state_attr('sensor.silverado_torque', 'Trip average MPG(mpg)') | round(1) }}"
+
+  - platform: template
+    sensors:
+      silverado_trip_distance:
+        friendly_name: "Silverado Trip Distance"
+        unit_of_measurement: 'miles'
+        value_template: "{{ state_attr('sensor.silverado_torque', 'Trip Distance(miles)') | round(1) }}"
+
+  - platform: template
+    sensors:
+      silverado_trip_time:
+        friendly_name: "Silverado Trip Time"
+        unit_of_measurement: 'seconds'
+        value_template: "{{ state_attr('sensor.silverado_torque', 'Trip Time(Since journey start)(s)') | round(1) }}"
+
+  - platform: template
+    sensors:
+      silverado_trip_time_moving:
+        friendly_name: "Silverado Trip Time While Moving"
+        unit_of_measurement: 'seconds'
+        value_template: "{{ state_attr('sensor.silverado_torque', 'Trip time(whilst moving)(s)') | round(1) }}"
+
+  - platform: template
+    sensors:
+      silverado_trip_time_stationary:
+        friendly_name: "Silverado Trip Time While Stationary"
+        unit_of_measurement: 'seconds'
+        value_template: "{{ state_attr('sensor.silverado_torque', 'Trip time(whilst stationary)(s)') | round(1) }}"
+
+# ===================================   
+
+#  ==== System Monitor (HA Blue) ===============
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /config
+      - type: memory_free
+      - type: memory_use_percent
+      - type: processor_use
+      - type: processor_temperature
+      - type: ipv4_address
+        arg: eth0
+      - type: network_in
+        arg: eth0
+      - type: network_out
+        arg: eth0
+
+# ===================================   
+
+
+
+# =========== Google Fit ============
+  - platform: google_fit
+    name: Google Fit
+    client_id: !secret google_fit_client_id
+    client_secret: !secret google_fit_client_secret
+
+  - platform: template
+    sensors:
+      google_fit_distance_miles:
+        friendly_name: "Google Fit Distance (miles)"
+        unit_of_measurement: 'mi'
+        value_template: "{{ ((states('sensor.google_fit_distance') | float) * 0.621371 | float) | round(2) }}"
+        
+  - platform: template
+    sensors:
+      google_fit_weight_lbs:
+        friendly_name: "Google Fit Weight (lbs)"
+        unit_of_measurement: 'lbs'
+        value_template: "{{ ((states('sensor.google_fit_weight') | float) * 2.20462 | float) | round(1) }}"
+
+# ===================================   
+
+
+# =========== MyFitnessPal ============
+
+  - platform: template
+    sensors:
+      myfitnesspal_aaron_goal_calories:
+        friendly_name: "Goal Calories (cal)"
+        unit_of_measurement: 'cal'
+        value_template: "{{ state_attr('sensor.myfitnesspal_aaron', 'Goal calories') }}"
+
+  - platform: template
+    sensors:
+      myfitnesspal_aaron_total_calories:
+        friendly_name: "Total Calories (cal)"
+        unit_of_measurement: 'cal'
+        value_template: "{{ state_attr('sensor.myfitnesspal_aaron', 'Total calories') | round(1) }}"
+
+
+# ===================================   
+
+
+# =========== Thermostat & Window AC ============
+
+# Make the temp setpoint sensor from Basement climate entity
+
+  - platform: template
+    sensors:
+      basement_temperature_setpoint:
+        friendly_name: "Basement Thermostat Temperature Setpoint"
+        unit_of_measurement: 'deg F'
+        value_template: "{{ state_attr('climate.basement', 'temperature') }}"
+
+
+# subtract to get the difference
+
+  - platform: template
+    sensors:
+      basement_temp_vs_setpoint:
+        friendly_name: "Basement Temp vs Setpoint"
+        unit_of_measurement: 'deg F'
+        value_template: "{{ (((states('sensor.basement_temperature') | float)) - ((states('sensor.basement_temperature_setpoint') | float))) | round(1) }}"
+
+
+
+# ===================================   
+
+# =========== Mailbox Status Sensor ============
+
+  - platform: template
+    sensors:
+      mailbox_status:
+        friendly_name: Mailbox Status
+        value_template: >-
+          {{ as_timestamp(states("input_datetime.mail_arrived")) | timestamp_custom("%I:%M %p") }}
+
+
+# =========== SwitchBot Curtain Rest Sensor ========
+  - platform: rest
+    name: 'Dining Room Curtain Position'
+    resource: !secret switchbot_dining_room_curtain_status_url
+    method: GET
+    scan_interval: 60
+    headers:
+      Authorization: !secret switchbot_api
+      Content-Type: 'application/json'
+    value_template: '{{ value_json.body.slidePosition }}'
+    json_attributes_path: "$.body"
+    json_attributes:
+      - deviceId
+      - deviceType
+      - hubDeviceId
+      - calibrate
+      - group
+      - moving
+      - slidePosition
+
+# ========= SwitchBot Meter Sensor ======
+  - platform: rest
+    name: 'SwitchBot Meter1'
+    resource: !secret switchbot_meter1_status_url
+    method: GET
+    scan_interval: 60
+    headers:
+      Authorization: !secret switchbot_api
+      Content-Type: 'application/json'
+    value_template: '{{ value_json.body }}'
+    json_attributes_path: "$.body"
+    json_attributes:
+      - deviceId 
+      - deviceType
+      - hubDeviceId
+      - humidity
+      - temperature
+  - platform: template
+    sensors:
+      switchbot_meter1_temp:
+        friendly_name: "SwitchBot Meter1 Temperature"
+        value_template: '{{ states.sensor.switchbot_meter1.attributes["temperature"] }}'
+        unit_of_measurement: "°C"
+        device_class: "temperature"
+      switchbot_meter1_humidity:
+        friendly_name: "SwitchBot Meter1 Humidity"
+        value_template: '{{ states.sensor.switchbot_meter1.attributes["humidity"] }}'
+        unit_of_measurement: "%"
+        device_class: "humidity"
+      switchbot_meter1_battery:
+        friendly_name: "SwitchBot Meter1 Battery"
+        value_template: '{{ states.sensor.switchbot_meter1.attributes["battery"] }}'
+        unit_of_measurement: "%"
+        device_class: "battery"
+
+
