@@ -20,42 +20,28 @@
 # ==== Google WiFi Integration =====   
   - platform: google_wifi
 # =================================== 
+  
 
-
-# ==== Fully Kiosk Browser =======
-  - platform: rest
-    name: GS7
-    json_attributes:
-      - batteryLevel
-      - kioskMode
-      - screenBrightness
-      - motionDetectorState
-      - maintenanceMode
-      - appFreeMemory
-      - appUsedMemory
-      - totalFreeMemory
-      - totalUsedMemory
-      - hostname4
-      - ip4
-      - mac
-      - locationLatitude
-      - locationLongitude
-      - locationAltitude
-      - startUrl
-      - currentPage
-    resource: !secret fully_kiosk_gs7_resource
-    value_template: '{{ value_json.isScreenOn }}'
-# ===================================    
-
-
-
+  
+# ==== Google Maps popular times ====
+  - platform: populartimes
+    name: 'tullys'
+    address: "Tully's Good Times Clarks Summit, 820 Northern Blvd, Clarks Summit, PA 18411, USA"
+# =================================== 
+    
 #  ==== Torque Pro Sensors ===============
+# # ---- Initial Sensor
+#   - platform: mqtt
+#     name: "Silverado Torque"
+#     state_topic: "devices/silverado/torque"
+#     value_template: "{{ state_attr('sensor.silverado_torque','GPS Time') }}"
+#     json_attributes_topic: "devices/silverado/torque"
 # ---- Initial Sensor
   - platform: mqtt
     name: "Silverado Torque"
-    state_topic: "devices/silverado/torque"
+    state_topic: "devices/Chevy Silverado/torque"
     value_template: "{{ state_attr('sensor.silverado_torque','GPS Time') }}"
-    json_attributes_topic: "devices/silverado/torque"
+    json_attributes_topic: "devices/Chevy Silverado/torque"
 # ---- Attribute Sensors    
   - platform: template
     sensors:
@@ -186,6 +172,10 @@
     resources:
       - type: disk_use_percent
         arg: /config
+      - type: disk_use
+        arg: /
+      - type: disk_free
+        arg: /
       - type: memory_free
       - type: memory_use_percent
       - type: processor_use
@@ -299,39 +289,22 @@
       - moving
       - slidePosition
 
-# ========= SwitchBot Meter Sensor ======
-  - platform: rest
-    name: 'SwitchBot Meter1'
-    resource: !secret switchbot_meter1_status_url
-    method: GET
-    scan_interval: 60
-    headers:
-      Authorization: !secret switchbot_api
-      Content-Type: 'application/json'
-    value_template: '{{ value_json.body }}'
-    json_attributes_path: "$.body"
-    json_attributes:
-      - deviceId 
-      - deviceType
-      - hubDeviceId
-      - humidity
-      - temperature
+#   - platform: mqtt
+#     name: "Gas Meter"
+#     state_topic: rtlamr/gas_meter/state
+#     unit_of_measurement: "ft³"
+
+# Days Since Last Rained - Uses last rained input datetime
   - platform: template
     sensors:
-      switchbot_meter1_temp:
-        friendly_name: "SwitchBot Meter1 Temperature"
-        value_template: '{{ states.sensor.switchbot_meter1.attributes["temperature"] }}'
-        unit_of_measurement: "°C"
-        device_class: "temperature"
-      switchbot_meter1_humidity:
-        friendly_name: "SwitchBot Meter1 Humidity"
-        value_template: '{{ states.sensor.switchbot_meter1.attributes["humidity"] }}'
-        unit_of_measurement: "%"
-        device_class: "humidity"
-      switchbot_meter1_battery:
-        friendly_name: "SwitchBot Meter1 Battery"
-        value_template: '{{ states.sensor.switchbot_meter1.attributes["battery"] }}'
-        unit_of_measurement: "%"
-        device_class: "battery"
+      days_since_last_rained:
+        value_template: '{{ ((as_timestamp(now()) - (states.input_datetime.last_rained.attributes.timestamp)) | int /60/1440) | round(0) }}'
+        friendly_name: "Days Since Last Rained"
 
+# Days Since Last Sprinkled - Uses last rained input datetime
+  - platform: template
+    sensors:
+      days_since_last_sprinkled:
+        value_template: '{{ ((as_timestamp(now()) - (states.input_datetime.sprinkler_ran_last.attributes.timestamp)) | int /60/1440) | round(0) }}'
+        friendly_name: "Days Since Last Sprinkled"
 
