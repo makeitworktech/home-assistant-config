@@ -1,0 +1,6 @@
+# --- Torque Pro Initial sensor --- #
+sensor:
+  - state_topic: "devices/Chevy Silverado/torque"
+    value_template: "{{ state_attr('sensor.silverado_torque','GPS Time') }}"
+    json_attributes_topic: "devices/Chevy Silverado/torque"
+    name: "Silverado Torque"
