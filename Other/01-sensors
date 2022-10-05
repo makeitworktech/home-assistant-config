@@ -30,18 +30,7 @@
 # =================================== 
     
 #  ==== Torque Pro Sensors ===============
-# # ---- Initial Sensor
-#   - platform: mqtt
-#     name: "Silverado Torque"
-#     state_topic: "devices/silverado/torque"
-#     value_template: "{{ state_attr('sensor.silverado_torque','GPS Time') }}"
-#     json_attributes_topic: "devices/silverado/torque"
-# ---- Initial Sensor
-  - platform: mqtt
-    name: "Silverado Torque"
-    state_topic: "devices/Chevy Silverado/torque"
-    value_template: "{{ state_attr('sensor.silverado_torque','GPS Time') }}"
-    json_attributes_topic: "devices/Chevy Silverado/torque"
+# # ---- Initial Sensor moved to mqtt.yaml ---- 
 # ---- Attribute Sensors    
   - platform: template
     sensors:
@@ -307,4 +296,3 @@
       days_since_last_sprinkled:
         value_template: '{{ ((as_timestamp(now()) - (states.input_datetime.sprinkler_ran_last.attributes.timestamp)) | int /60/1440) | round(0) }}'
         friendly_name: "Days Since Last Sprinkled"
-
