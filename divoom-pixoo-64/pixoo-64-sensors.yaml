@@ -1,0 +1,45 @@
+  # These sensors need to be added to your configuration.yaml file under the 'sensor:'
+  # integration or in your 'sensors.yaml' file.
+    
+  - platform: rest
+    name: pixoo64 Data
+    resource: !secret pixoo_post_address
+    method: POST
+    payload: '{ "Command" : "Channel/GetAllConf" }'
+    value_template: "OK"
+    scan_interval: 2
+    json_attributes:
+      - Brightness
+      - RotationFlag
+      - ClockTime
+      - GalleryTime
+      - SingleGalleyTime
+      - PowerOnChannelId
+      - GalleryShowTimeFlag
+      - CurClockId
+      - Time24Flag
+      - TemperatureMode
+      - GyrateAngle
+      - MirrorFlag
+      - LightSwitch
+  - platform: rest
+    name: pixoo64 Current Channel Integer
+    resource: !secret pixoo_post_address
+    method: POST
+    payload: '{ "Command" : "Channel/GetIndex" }'
+    value_template: "{{ value_json.SelectIndex }}" # channel id 0~3 ；0:Faces;1:Cloud Channdle;2:Visualizer;3:Custom
+    scan_interval: 10
+  - platform: template
+    sensors:
+      pixoo64_current_channel:
+        friendly_name: "pixoo64 Current Channel"
+        value_template: >-
+          {% if (states.sensor.pixoo64_current_channel_integer.state|int == 0) %}
+            Faces
+          {% elif (states.sensor.pixoo64_current_channel_integer.state|int == 1) %}
+            Cloud Channel
+          {% elif (states.sensor.pixoo64_current_channel_integer.state|int == 2) %}
+            Visualizer            
+          {% else %}
+            Custom
+          {% endif %}
