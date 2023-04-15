@@ -1,0 +1,32 @@
+# Add this to your HA configuration.yaml under the 'light:' integration, or to your 'lights.yaml' file if you've split out your configuration (which you should).
+# Source: https://community.home-assistant.io/t/divoom-pixoo-64/420660
+
+- platform: template
+  lights:
+    pixoo64:
+      friendly_name: "Pixoo"
+      level_template: "{{ ( state_attr('sensor.pixoo64_data', 'Brightness') * 2.55 ) | round(0) | int  }}"
+      value_template: "{{ state_attr('sensor.pixoo64_data', 'LightSwitch')|int == 1 }}"
+      effect_list_template: "{{['Faces', 'Cloud Channel', 'Visualizer', 'Custom']}}"
+      effect_template: "{{ states('sensor.pixoo64_current_channel') }}"
+      turn_on:
+        service: rest_command.pixoo64_switch_on
+      turn_off:
+        service: rest_command.pixoo64_switch_off
+      set_level:
+        service: rest_command.pixoo64_set_brightness
+        data:
+          brightness: "{{ ( brightness / 2.55 ) | round(0) | int }}"
+      set_effect:
+        - service: rest_command.pixoo64_set_channel
+          data:
+            effect: >-
+              {% if effect == 'Faces' %}
+              0
+              {% elif effect == 'Cloud Channel' %}
+              1
+              {% elif effect == 'Visualizer' %}
+              2
+              {% else %}
+              3
+              {% endif %}
