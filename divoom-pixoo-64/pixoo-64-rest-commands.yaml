@@ -1,0 +1,57 @@
+  # -- DIVOOM Commands --
+  # Some of these commands will be called by the light entity. 
+  # These rest commands should be pasted into your 'rest_commands.yaml'
+  # file if you've split out your configuration, or into your
+  # 'configuration.yaml' file under the 'rest_command:' integration.
+  # Don't forget that you need to add the IP address of your Pixoo64 
+  # to your 'secrets.yaml' file like this:
+  #
+  #     pixoo_post_address: http://192.168.86.71:80/post
+  
+  # Divoom API: http://doc.divoom-gz.com/web/#/12?page_id=196
+  
+  pixoo64_set_brightness:
+    url: !secret pixoo_post_address
+    method: POST
+    payload: '{"Command":"Channel/SetBrightness", "Brightness":{{ brightness }}}'
+    content_type:  'application/json; charset=utf-8'
+  pixoo64_switch_off:
+    url: !secret pixoo_post_address
+    method: POST
+    payload: '{"Command":"Channel/OnOffScreen", "OnOff":0}'
+    content_type:  'application/json; charset=utf-8'
+  pixoo64_switch_on:
+    url: !secret pixoo_post_address
+    method: POST
+    payload: '{"Command":"Channel/OnOffScreen", "OnOff":1}'
+    content_type:  'application/json; charset=utf-8'
+  pixoo64_set_channel:
+    url: !secret pixoo_post_address
+    method: POST
+    payload: '{"Command":"Channel/SetIndex", "SelectIndex":{{ effect }}}'
+    content_type:  'application/json; charset=utf-8'
+  pixoo64_set_custom_channel_page:
+    url: !secret pixoo_post_address
+    method: POST
+    payload: '{"Command":"Channel/SetCustomPageIndex", "CustomPageIndex":{{ page }}}'
+    content_type:  'application/json; charset=utf-8'
+  pixoo64_set_text:
+    url: !secret pixoo_post_address
+    method: POST
+    payload: '{"Command":"Draw/SendHttpText", "TextId":{{ id }}, "x":0, "y":{{ y }}, "dir":0, "font":{{ font }}, "TextWidth":64, "speed":{{ speed }}, "TextString":"{{ text }}", "color":"{{ color }}", "align":2}'
+    content_type:  'application/json; charset=utf-8'
+  pixoo64_reset_gif:
+    url: !secret pixoo_post_address
+    method: POST
+    payload: '{"Command":"Draw/ResetHttpGifId"}'
+    content_type:  'application/json; charset=utf-8'
+  pixoo64_send_gif:
+    url: !secret pixoo_post_address
+    method: POST
+    payload: '{"Command":"Draw/SendHttpGif", "PicNum":1, "PicWidth":64, "PicOffset":0, "PicID":0, "PicSpeed":100, "PicData":"{{ gif }}"}'
+    content_type:  'application/json; charset=utf-8'
+  pixoo64_play_buzzer:
+    url: !secret pixoo_post_address
+    method: POST
+    payload: '{"Command":"Device/PlayBuzzer", "ActiveTimeInCycle":500, "OffTimeInCycle":500, "PlayTotalTime":500}'
+    content_type:  'application/json; charset=utf-8'
