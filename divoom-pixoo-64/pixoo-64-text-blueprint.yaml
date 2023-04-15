@@ -1,0 +1,132 @@
+#Note: This blueprint requires rest commands to be set up in your Home Assistant instance.
+blueprint:
+  name: Send Text to Pixoo64
+  description: Send text to the Pixoo64 - 4 lines, each can be their own color.
+  source_url: https://community.home-assistant.io/t/divoom-pixoo64-send-text-4-lines/554428
+  domain: automation
+  input:
+    text_line_1:
+      name: Text Line 1
+      description: Text to display on Line 1
+      selector:
+        text:
+      default: false
+    color_line_1:
+      name: Color Line 1
+      description: Line 1 text color (RGB value)
+      selector:
+        color_rgb:
+      default: [255, 255, 0]
+    text_line_2:
+      name: Text Line 2
+      description: Text to display on Line 2
+      selector:
+        text:
+      default: false
+    color_line_2:
+      name: Color Line 2
+      description: Line 2 text color (RGB value)
+      selector:
+        color_rgb:
+      default: [0, 255, 255]
+    text_line_3:
+      name: Text Line 3
+      description: Text to display on Line 3
+      selector:
+        text:
+      default: false
+    color_line_3:
+      name: Color Line 3
+      description: Line 3 text color (RGB value)
+      selector:
+        color_rgb:
+      default: [255, 0, 255]
+    text_line_4:
+      name: Text Line 4
+      description: Text to display on Line 4
+      selector:
+        text:
+      default: false
+    color_line_4:
+      name: Color Line 4
+      description: Line 4 text color (RGB value)
+      selector:
+        color_rgb:
+      default: [0, 0, 255]
+    text_speed:
+      name: Text speed
+      description: Text speed if the text is long enough where it needs to scroll
+      selector:
+        number:
+          min: 10
+          max: 100
+      default: 50
+
+mode: single
+max_exceeded: silent
+
+variables:
+  text_line_1: !input 'text_line_1'
+  text_line_2: !input 'text_line_2'
+  text_line_3: !input 'text_line_3'
+  text_line_4: !input 'text_line_4'
+  color_line_1: !input 'color_line_1'
+  rgbc1: >-
+    {{ "#%02x%02x%02x" | format(color_line_1[0], color_line_1[1], color_line_1[2]) }}
+  color_line_2: !input 'color_line_2'
+  rgbc2: >-
+    {{ "#%02x%02x%02x" | format(color_line_2[0], color_line_2[1], color_line_2[2]) }}
+  color_line_3: !input 'color_line_3'
+  rgbc3: >-
+    {{ "#%02x%02x%02x" | format(color_line_3[0], color_line_3[1], color_line_3[2]) }}
+  color_line_4: !input 'color_line_4'
+  rgbc4: >-
+    {{ "#%02x%02x%02x" | format(color_line_4[0], color_line_4[1], color_line_4[2]) }}
+  text_speed: !input 'text_speed'
+  
+
+trigger: []
+
+action:
+  - service: rest_command.pixoo64_reset_gif
+  - service: rest_command.pixoo64_send_gif
+  - delay:
+      milliseconds: 50
+  - service: rest_command.pixoo64_set_text
+    data:
+      id: 1
+      y: 2
+      font: 8
+      speed: "{{ text_speed }}"
+      text: "{{ text_line_1 }}"
+      color: "{{ rgbc1 }}"
+  - delay:
+      milliseconds: 50
+  - service: rest_command.pixoo64_set_text
+    data:
+      id: 2
+      y: 17
+      font: 8
+      speed: "{{ text_speed }}"
+      text: "{{ text_line_2 }}"
+      color: "{{ rgbc2 }}"
+  - delay:
+      milliseconds: 50
+  - service: rest_command.pixoo64_set_text
+    data:
+      id: 3
+      y: 32
+      font: 8
+      speed: "{{ text_speed }}"
+      text: "{{ text_line_3 }}"
+      color: "{{ rgbc3 }}"
+  - delay:
+      milliseconds: 50
+  - service: rest_command.pixoo64_set_text
+    data:
+      id: 4
+      y: 47
+      font: 8
+      speed: "{{ text_speed }}"
+      text: "{{ text_line_4 }}"
+      color: "{{ rgbc4 }}"
