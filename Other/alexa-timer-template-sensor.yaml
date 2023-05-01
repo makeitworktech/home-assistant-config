@@ -1,0 +1,11 @@
+ # Paste this in your configuration.yaml file
+
+ template:
+  - trigger:
+     - platform: time_pattern
+       seconds: "/1"
+    sensor: 
+      name: "Office Echo Dot Timer Percentage"
+      unique_id: office_echo_dot_timer_percentage
+      unit_of_measurement: '%'
+      state: "{{ (((as_timestamp(state_attr('sensor.office_echo_dot_next_timer', 'prior_value')) | float - (as_timestamp(now()) | float) | float) / ((state_attr('sensor.office_echo_dot_next_timer', 'sorted_active') | from_json)[0][1].originalDurationInMillis/ 1000)| round(0))*100) | round(0) }}"
