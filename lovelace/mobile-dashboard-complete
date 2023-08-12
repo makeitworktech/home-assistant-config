@@ -1,25 +1,34 @@
 views:
   - theme: Backend-selected
-    title: Mushroom
+    title: HOME ASSISTANT
     path: mushroom
-    icon: mdi:home-heart
+    visible: true
+    icon: ''
+    subview: false
     badges: []
     cards:
-      - type: custom:mushroom-chips-card
-        chips:
-          - type: alarm-control-panel
-            entity: alarm_control_panel.alexa_guard_a7ffa
-            content_info: name
-            name: Guard
-          - type: alarm-control-panel
-            entity: alarm_control_panel.blink_home
-            content_info: name
-            name: Blink
-          - type: weather
-            entity: weather.home
-            show_conditions: true
-            show_temperature: true
-        alignment: center
+      - type: custom:mushroom-title-card
+        title: ''
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: back
+            alignment: start
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: weather
+                entity: weather.home
+                show_temperature: true
+            alignment: center
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: entity
+                entity: sensor.living_room_humidity
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: menu
+            alignment: end
       - type: horizontal-stack
         cards:
           - type: custom:mushroom-title-card
@@ -116,11 +125,11 @@ views:
               {% endif %}
             layout: vertical
             tap_action:
-              action: call-service
-              service: script.lock_any_unlocked_locks
-            hold_action:
               action: navigate
               navigation_path: security
+            hold_action:
+              action: call-service
+              service: script.lock_any_unlocked_locks
             multiline_secondary: false
             entity: lock.front_door_lock
             style: |
@@ -171,7 +180,7 @@ views:
                   - type: custom:mushroom-entity-card
                     entity: sensor.living_room_temperature
                     name: Living Room
-                    hide_icon: true
+                    icon_type: none
                     tap_action:
                       action: navigate
                       navigation_path: livingroom
@@ -185,6 +194,7 @@ views:
                   ha-card { 
                     background-color: rgba(0,0,0,0);
                     box-shadow: none;
+                    border-style: hidden;
                   }
               - type: custom:mini-graph-card
                 hours_to_show: 48
@@ -214,6 +224,7 @@ views:
             style: |
               ha-card { 
                 border-radius: 20px;
+                box-shadow: none;
               }
           - type: custom:stack-in-card
             mode: vertical
@@ -224,7 +235,7 @@ views:
                   - type: custom:mushroom-entity-card
                     entity: sensor.4_in_1_sensor_air_temperature
                     name: Kitchen
-                    hide_icon: true
+                    icon_type: none
                     tap_action:
                       action: navigate
                       navigation_path: kitchen
@@ -243,6 +254,7 @@ views:
                   ha-card { 
                     background-color: rgba(0,0,0,0);
                     box-shadow: none;
+                    border-style: hidden;
                   }
               - type: custom:mini-graph-card
                 hours_to_show: 48
@@ -303,6 +315,7 @@ views:
                   ha-card { 
                     background-color: rgba(0,0,0,0);
                     box-shadow: none;
+                    border-style: hidden;
                   }
               - type: custom:mini-graph-card
                 hours_to_show: 48
@@ -332,6 +345,7 @@ views:
             style: |
               ha-card { 
                 border-radius: 20px;
+                box-shadow: none;
               }
           - type: custom:stack-in-card
             mode: vertical
@@ -340,7 +354,7 @@ views:
                 mode: horizontal
                 cards:
                   - type: custom:mushroom-entity-card
-                    entity: sensor.office_smartthings_button_temperature
+                    entity: sensor.office_thermometer_hygrometer_temperature
                     name: Office
                     hide_icon: true
                     tap_action:
@@ -361,12 +375,13 @@ views:
                   ha-card { 
                     background-color: rgba(0,0,0,0);
                     box-shadow: none;
+                    border-style: hidden;
                   }
               - type: custom:mini-graph-card
                 hours_to_show: 48
                 graph: line
                 entities:
-                  - sensor.office_smartthings_button_temperature
+                  - sensor.office_thermometer_hygrometer_temperature
                 show:
                   state: false
                   name: false
@@ -380,11 +395,11 @@ views:
                     color: '#008000'
                   - value: 74
                     color: '#FFFF00'
-                  - value: 75
-                    color: '#FF6600'
                   - value: 76
-                    color: '#FF0000'
+                    color: '#FF6600'
                   - value: 78
+                    color: '#FF0000'
+                  - value: 80
                     color: '#FF69B4'
                 points_per_hour: 1
             style: |
@@ -421,6 +436,7 @@ views:
                   ha-card { 
                     background-color: rgba(0,0,0,0);
                     box-shadow: none;
+                    border-style: hidden;
                   }
               - type: custom:mini-graph-card
                 hours_to_show: 48
@@ -458,7 +474,7 @@ views:
                 mode: horizontal
                 cards:
                   - type: custom:mushroom-entity-card
-                    entity: sensor.corner_bedroom_temperature_sensor
+                    entity: sensor.corner_bedroom_thermometer_hygrometer_temperature
                     name: Corner
                     hide_icon: true
                     tap_action:
@@ -479,12 +495,13 @@ views:
                   ha-card { 
                     background-color: rgba(0,0,0,0);
                     box-shadow: none;
+                    border-style: hidden;
                   }
               - type: custom:mini-graph-card
                 hours_to_show: 48
                 graph: line
                 entities:
-                  - sensor.corner_bedroom_temperature_sensor
+                  - sensor.corner_bedroom_thermometer_hygrometer_temperature
                 show:
                   state: false
                   name: false
@@ -518,7 +535,7 @@ views:
                 mode: horizontal
                 cards:
                   - type: custom:mushroom-entity-card
-                    entity: sensor.front_bedroom_temperature
+                    entity: sensor.front_bedroom_thermometer_hygrometer_temperature
                     name: Front
                     hide_icon: true
                     tap_action:
@@ -539,12 +556,13 @@ views:
                   ha-card { 
                     background-color: rgba(0,0,0,0);
                     box-shadow: none;
+                    border-style: hidden;
                   }
               - type: custom:mini-graph-card
                 hours_to_show: 48
                 graph: line
                 entities:
-                  - sensor.front_bedroom_temperature
+                  - sensor.front_bedroom_thermometer_hygrometer_temperature
                 show:
                   state: false
                   name: false
@@ -590,13 +608,14 @@ views:
                   - type: custom:mushroom-chips-card
                     chips:
                       - type: light
-                        entity: light.corner_bedroom_light
+                        entity: light.garage_lights
                         use_light_color: false
                     alignment: end }
                 style: |
                   ha-card { 
                     background-color: rgba(0,0,0,0);
                     box-shadow: none;
+                    border-style: hidden;
                   }
               - type: custom:mini-graph-card
                 hours_to_show: 48
@@ -636,7 +655,7 @@ views:
                 mode: horizontal
                 cards:
                   - type: custom:mushroom-entity-card
-                    entity: sensor.guest_room_temperature_humidity_temperature
+                    entity: sensor.guest_room_thermometer_hygrometer_temperature
                     name: Guest Room
                     hide_icon: true
                     tap_action:
@@ -657,12 +676,13 @@ views:
                   ha-card { 
                     background-color: rgba(0,0,0,0);
                     box-shadow: none;
+                    border-style: hidden;
                   }
               - type: custom:mini-graph-card
                 hours_to_show: 48
                 graph: line
                 entities:
-                  - sensor.guest_room_temperature_humidity_temperature
+                  - sensor.guest_room_thermometer_hygrometer_temperature
                 show:
                   state: false
                   name: false
@@ -707,7 +727,7 @@ views:
                     mode: horizontal
                     cards:
                       - type: custom:mushroom-entity-card
-                        entity: sensor.bathroom_temperature
+                        entity: sensor.bathroom_th_sensor_temperature
                         name: Upstairs
                         hide_icon: true
                         tap_action:
@@ -721,19 +741,20 @@ views:
                       - type: custom:mushroom-chips-card
                         chips:
                           - type: light
-                            entity: light.bathroom_lights
+                            entity: light.basement_bathroom_lights
                             use_light_color: false
                         alignment: end }
                     style: |
                       ha-card { 
                         background-color: rgba(0,0,0,0);
                         box-shadow: none;
+                        border-style: hidden;
                       }
                   - type: custom:mini-graph-card
                     hours_to_show: 48
                     graph: line
                     entities:
-                      - sensor.bathroom_temperature
+                      - sensor.bathroom_th_sensor_temperature
                     show:
                       state: false
                       name: false
@@ -765,7 +786,7 @@ views:
                     mode: horizontal
                     cards:
                       - type: custom:mushroom-entity-card
-                        entity: sensor.basement_bathroom_temperature
+                        entity: sensor.basement_bathroom_th_sensor_temperature
                         name: Basement
                         hide_icon: true
                         tap_action:
@@ -786,12 +807,13 @@ views:
                       ha-card { 
                         background-color: rgba(0,0,0,0);
                         box-shadow: none;
+                        border-style: hidden;
                       }
                   - type: custom:mini-graph-card
                     hours_to_show: 48
                     graph: line
                     entities:
-                      - sensor.basement_bathroom_temperature
+                      - sensor.basement_bathroom_th_sensor_temperature
                     show:
                       state: false
                       name: false
@@ -896,8 +918,12 @@ views:
   - theme: Backend-selected
     icon: mdi:sofa
     path: livingroom
+    subview: false
+    visible: false
     badges: []
     cards:
+      - type: custom:mushroom-title-card
+        title: ''
       - type: horizontal-stack
         cards:
           - type: custom:mushroom-chips-card
@@ -917,6 +943,14 @@ views:
             chips:
               - type: menu
             alignment: end
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: entity
+                entity: binary_sensor.living_room_presence_sensor_occupancy
+                icon: mdi:human
+            alignment: center
       - type: custom:mushroom-title-card
         title: ''
         subtitle: Living Room
@@ -1022,18 +1056,29 @@ views:
                 background-color: rgba(0,0,0,0);
                 box-shadow: none;
               }
-          - type: horizontal-stack
-            cards:
-              - type: custom:mini-media-player
-                entity: media_player.living_room_echo_dot
-                name: Echo Dot
-                toggle_power: true
-                icon: phu:echo-dot-gen-3
-          - type: custom:mini-media-player
+          - type: custom:mushroom-media-player-card
+            entity: media_player.living_room_echo_dot
+            icon: phu:echo-dot-gen-3
+            show_volume_level: true
+            use_media_info: false
+            layout: horizontal
+            volume_controls:
+              - volume_buttons
+              - volume_set
+              - volume_mute
+            media_controls: []
+            name: Echo Dot
+          - type: custom:mushroom-media-player-card
             entity: media_player.living_room_speaker
             name: Nest Mini
-            sound_mode: full
-            icon: phu:home-mini
+            icon: phu:nest-mini-alt
+            use_media_info: true
+            show_volume_level: true
+            volume_controls:
+              - volume_mute
+              - volume_set
+              - volume_buttons
+            layout: horizontal
       - type: vertical-stack
         cards:
           - type: custom:mushroom-template-card
@@ -1046,16 +1091,20 @@ views:
           - type: horizontal-stack
             cards:
               - type: custom:mushroom-entity-card
-                entity: binary_sensor.living_room_motion_sensor_motion
-                name: Motion
+                entity: binary_sensor.living_room_presence_sensor_occupancy
+                name: Occupancy
               - type: custom:mushroom-entity-card
-                entity: binary_sensor.baby_gate_sensor_open_closed
-                name: Baby Gate
+                name: Motion
+                entity: binary_sensor.living_room_presence_sensor_pir_sensor
   - theme: Backend-selected
     icon: mdi:countertop
     path: kitchen
+    subview: false
+    visible: false
     badges: []
     cards:
+      - type: custom:mushroom-title-card
+        title: ''
       - type: horizontal-stack
         cards:
           - type: custom:mushroom-chips-card
@@ -1133,7 +1182,7 @@ views:
       - type: horizontal-stack
         cards:
           - type: custom:mushroom-fan-card
-            entity: fan.kitchen_fan
+            entity: fan.kitchen_fan_light
             icon: mdi:ceiling-fan
             name: Fan
           - type: custom:mushroom-entity-card
@@ -1142,18 +1191,32 @@ views:
       - type: custom:mushroom-template-card
         secondary: >-
           Fridge: {{ states
-          ('sensor.kitchen_refrigerator_contact_sensor_temperature') }}°F -
-          Freezer: {{ states ('sensor.kitchen_freezer_temperature') }}°F -
-          Power: {{ states ('sensor.kitchen_refrigerator_plug_power') }} W
+          ('sensor.kitchen_refrigerator_contact_sensor_temperature') }}°F - 
+          Freezer: {{ states ('sensor.kitchen_freezer_temperature') }}°F
 
+          Power: {{ states ('sensor.kitchen_refrigerator_plug_power') }} W   - 
           {{'Door Open' if
           is_state('binary_sensor.kitchen_refrigerator_contact_sensor_open_closed','on')
           else
                 'Door Closed'}}
         icon: mdi:fridge
-        entity: sensor.kitchen_refrigerator_contact_sensor_temperature
         primary: Refrigerator
         multiline_secondary: true
+        entity: sensor.kitchen_refrigerator_plug_power
+        tap_action:
+          action: more-info
+        icon_color: >-
+          {% if
+          is_state("binary_sensor.kitchen_refrigerator_contact_sensor_open_closed",
+          'off') %}
+
+          green
+
+          {% else %} 
+
+          red
+
+          {% endif %}
       - type: vertical-stack
         cards:
           - type: custom:mushroom-template-card
@@ -1164,11 +1227,11 @@ views:
                 box-shadow: none;
               }
           - type: custom:mushroom-cover-card
-            entity: cover.dining_room_curtains
             icon: ''
             show_position_control: true
             show_buttons_control: false
             name: ' '
+            entity: cover.dining_room_shade
       - type: custom:mushroom-template-card
         primary: Speakers
         style: |
@@ -1242,8 +1305,12 @@ views:
   - theme: Backend-selected
     icon: mdi:home-floor-b
     path: basement
+    subview: false
+    visible: false
     badges: []
     cards:
+      - type: custom:mushroom-title-card
+        title: ''
       - type: horizontal-stack
         cards:
           - type: custom:mushroom-chips-card
@@ -1263,6 +1330,13 @@ views:
             chips:
               - type: menu
             alignment: end
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: entity
+                entity: binary_sensor.basement_presence_sensor_mmwave_sensor
+            alignment: center
       - type: custom:mushroom-title-card
         title: ''
         subtitle: Basement
@@ -1309,6 +1383,18 @@ views:
             show_position_control: false
             show_buttons_control: true
             name: ' '
+      - type: vertical-stack
+        cards:
+          - type: custom:mushroom-template-card
+            primary: Thermostat
+            style: |
+              ha-card { 
+                background-color: rgba(0,0,0,0);
+                box-shadow: none;
+              }
+          - type: custom:mushroom-entity-card
+            name: Basement Thermostat
+            entity: climate.basement
       - type: vertical-stack
         cards:
           - type: custom:mushroom-template-card
@@ -1393,6 +1479,8 @@ views:
   - theme: Backend-selected
     icon: mdi:desk
     path: office
+    subview: false
+    visible: false
     badges: []
     cards:
       - type: horizontal-stack
@@ -1404,16 +1492,39 @@ views:
           - type: custom:mushroom-chips-card
             chips:
               - type: entity
-                entity: sensor.office_smartthings_button_temperature
-            alignment: center
+                entity: sensor.office_thermometer_hygrometer_temperature
+            alignment: end
           - type: custom:mushroom-chips-card
             chips:
               - type: entity
-                entity: sensor.basement_humidity
+                entity: sensor.office_thermometer_hygrometer_humidity
+            alignment: end
           - type: custom:mushroom-chips-card
             chips:
               - type: menu
             alignment: end
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: entity
+                entity: sensor.make_it_work_youtube_subscriber_count
+                icon_color: red
+                icon: mdi:youtube
+            alignment: end
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: entity
+                entity: binary_sensor.loginovo_presence_sensor_occupancy
+                icon: mdi:human
+                icon_color: light-blue
+            alignment: center
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: entity
+                entity: sensor.octoprint_print_progress
+                icon: mdi:printer-3d
+                icon_color: purple
       - type: custom:mushroom-title-card
         title: ''
         subtitle: Office
@@ -1464,6 +1575,28 @@ views:
             use_light_color: true
             show_brightness_control: true
             show_color_control: true
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-light-card
+            entity: light.32x8_pixel_art
+            icon: mdi:alarm-light
+            use_light_color: true
+            show_brightness_control: true
+            show_color_control: true
+            name: 32x8 Pixel Art
+          - type: custom:mushroom-light-card
+            entity: light.wled_soundreactive
+            use_light_color: true
+            show_brightness_control: true
+            show_color_control: true
+            name: 32x32 Pixel Art SR
+      - type: custom:mushroom-light-card
+        entity: light.pixoo64
+        icon: mdi:camera-metering-matrix
+        use_light_color: false
+        show_brightness_control: true
+        show_color_control: false
+        name: Divoom
       - type: vertical-stack
         cards:
           - type: custom:mushroom-template-card
@@ -1499,9 +1632,9 @@ views:
           - type: horizontal-stack
             cards:
               - type: custom:mushroom-entity-card
-                entity: binary_sensor.office_motion_sensor_motion
                 layout: horizontal
-                name: Motion
+                entity: binary_sensor.loginovo_presence_sensor_occupancy
+                name: Presence
               - type: custom:mushroom-entity-card
                 entity: sensor.basement_motion_sensor_illuminance
       - type: custom:mushroom-template-card
@@ -1520,7 +1653,7 @@ views:
       - type: vertical-stack
         cards:
           - type: custom:mushroom-template-card
-            primary: Mary (PC)
+            primary: Roxy (PC)
             style: |
               ha-card { 
                 background-color: rgba(0,0,0,0);
@@ -1528,18 +1661,18 @@ views:
               }
           - type: horizontal-stack
             cards:
-              - hours_to_show: 24
-                graph: line
+              - graph: line
+                hours_to_show: 24
                 type: sensor
                 detail: 1
-                entity: sensor.mary_cpu_usage
+                entity: sensor.roxy_cpuload
                 name: CPU
-              - hours_to_show: 24
-                graph: line
+              - graph: line
+                hours_to_show: 24
                 type: sensor
                 detail: 1
-                entity: sensor.mary_memory_usage
                 name: Memory
+                entity: sensor.roxy_memoryusage
           - type: horizontal-stack
             cards:
               - type: sensor
@@ -1548,11 +1681,13 @@ views:
                 name: power
                 hours_to_show: 48
                 graph: line
-              - hours_to_show: 24
-                graph: line
+              - graph: line
+                hours_to_show: 24
                 type: sensor
-                entity: sensor.mary_gpuload
+                entity: sensor.roxy_gpuload
                 detail: 1
+                icon: mdi:expansion-card
+                name: GPU Load
       - type: vertical-stack
         cards:
           - type: custom:mushroom-template-card
@@ -1579,11 +1714,11 @@ views:
       - type: horizontal-stack
         cards:
           - type: custom:mushroom-entity-card
-            entity: button.mary_sleep
             name: PC Sleep
             secondary_info: none
             tap_action:
               action: toggle
+            entity: button.roxy_sleep
           - type: custom:mushroom-entity-card
             entity: switch.pc_bot
             icon: mdi:desktop-tower-monitor
@@ -1608,15 +1743,19 @@ views:
               - type: light
                 entity: light.office_lights
             alignment: end }
+      - type: custom:mushroom-light-card
+        entity: switch.basement_hall_bench_light
+        name: Bench Light
+        icon: mdi:wall-sconce-flat
       - type: horizontal-stack
         cards:
           - type: custom:mushroom-light-card
-            entity: light.office_light
-            name: Bench Light
-          - type: custom:mushroom-title-card
-            title: ' '
-      - type: horizontal-stack
-        cards:
+            entity: light.basement_hall_bench_backlight_strip
+            name: Bench Backlight Strip
+            icon: mdi:led-strip-variant
+            use_light_color: true
+            show_brightness_control: true
+            show_color_control: true
           - type: custom:mushroom-light-card
             entity: light.basement_hall_bench_light_strip
             name: Bench Light Strip
@@ -1624,6 +1763,8 @@ views:
             use_light_color: true
             show_brightness_control: true
             show_color_control: true
+      - type: horizontal-stack
+        cards:
           - type: custom:mushroom-template-card
             secondary: |-
               {{ states ('sensor.octoprint_print_status') }}
@@ -1635,9 +1776,15 @@ views:
             primary: Ender 3 V2
             multiline_secondary: true
             icon_color: purple
+          - type: custom:mushroom-entity-card
+            entity: camera.backyard_camera
+            name: Printer Cam
+            layout: vertical
   - theme: Backend-selected
     icon: mdi:bed-king
     path: master
+    subview: false
+    visible: false
     badges: []
     cards:
       - type: horizontal-stack
@@ -1689,12 +1836,50 @@ views:
                 name: Main Light
               - type: custom:mushroom-light-card
                 entity: light.master_bedroom_light_strip
-                show_brightness_control: true
+                show_brightness_control: false
                 name: Bed Light Strip
                 icon: mdi:led-strip-variant
-                show_color_control: true
+                show_color_control: false
                 use_light_color: true
-                show_color_temp_control: true
+                show_color_temp_control: false
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+      - type: vertical-stack
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mushroom-template-card
+                    primary: Shades
+                    style: |
+                      ha-card { 
+                        background-color: rgba(0,0,0,0);
+                        box-shadow: none;
+                      }
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-cover-card
+                name: Shade 1
+                show_position_control: false
+                tap_action:
+                  action: more-info
+                icon: mdi:roller-shade
+                hold_action:
+                  action: toggle
+                entity: cover.master_bedroom_shade_1
+              - type: custom:mushroom-cover-card
+                icon: mdi:roller-shade
+                show_buttons_control: false
+                name: Shade 2
+                show_position_control: false
+                tap_action:
+                  action: more-info
+                hold_action:
+                  action: toggle
+                entity: cover.master_bedroom_shade_2
       - type: vertical-stack
         cards:
           - type: custom:mushroom-template-card
@@ -1767,6 +1952,8 @@ views:
   - theme: Backend-selected
     icon: mdi:bunk-bed
     path: corner
+    subview: false
+    visible: false
     badges: []
     cards:
       - type: horizontal-stack
@@ -1883,6 +2070,8 @@ views:
   - theme: Backend-selected
     icon: mdi:bed
     path: front
+    subview: false
+    visible: false
     badges: []
     cards:
       - type: horizontal-stack
@@ -2005,6 +2194,8 @@ views:
   - theme: Backend-selected
     icon: mdi:garage
     path: garage
+    subview: false
+    visible: false
     badges: []
     cards:
       - type: horizontal-stack
@@ -2161,6 +2352,8 @@ views:
   - theme: Backend-selected
     icon: mdi:bed-double-outline
     path: guestroom
+    subview: false
+    visible: false
     badges: []
     cards:
       - type: horizontal-stack
@@ -2172,12 +2365,12 @@ views:
           - type: custom:mushroom-chips-card
             chips:
               - type: entity
-                entity: sensor.guest_room_temperature_humidity_temperature
+                entity: sensor.guest_room_thermometer_hygrometer_temperature
             alignment: center
           - type: custom:mushroom-chips-card
             chips:
               - type: entity
-                entity: sensor.guest_room_temperature_humidity_humidity
+                entity: sensor.guest_room_thermometer_hygrometer_humidity
           - type: custom:mushroom-chips-card
             chips:
               - type: menu
@@ -2213,6 +2406,8 @@ views:
   - theme: Backend-selected
     icon: mdi:shower
     path: bathroom
+    subview: false
+    visible: false
     badges: []
     cards:
       - type: horizontal-stack
@@ -2281,6 +2476,8 @@ views:
   - theme: Backend-selected
     icon: mdi:paper-roll
     path: basementbathroom
+    subview: false
+    visible: false
     badges: []
     cards:
       - type: horizontal-stack
@@ -2292,12 +2489,12 @@ views:
           - type: custom:mushroom-chips-card
             chips:
               - type: entity
-                entity: sensor.bathroom_temperature
+                entity: sensor.basement_bathroom_th_temperature
             alignment: center
           - type: custom:mushroom-chips-card
             chips:
               - type: entity
-                entity: sensor.bathroom_humidity
+                entity: sensor.basement_bathroom_th_humidity
           - type: custom:mushroom-chips-card
             chips:
               - type: menu
@@ -2350,6 +2547,8 @@ views:
     title: Flower Bed
     path: flower-bed
     icon: mdi:flower-tulip
+    subview: false
+    visible: false
     badges: []
     cards:
       - type: horizontal-stack
@@ -2481,6 +2680,8 @@ views:
     title: Security
     path: security
     icon: mdi:shield-lock
+    subview: false
+    visible: false
     badges: []
     cards:
       - type: horizontal-stack
@@ -2513,9 +2714,9 @@ views:
             layout: vertical
             name: Front
           - type: custom:mushroom-lock-card
-            entity: lock.deck_door_lock
             layout: vertical
             name: Deck
+            entity: lock.u_bolt_pro_z_wave_smart_lock
           - type: custom:mushroom-lock-card
             entity: lock.back_door_lock
             name: Back
@@ -2566,3 +2767,38 @@ views:
             entity: camera.garage_camera
             layout: vertical
             name: Garage
+      - type: picture-glance
+        title: Backyard
+        camera_image: camera.duo2
+        camera_view: live
+        entities:
+          - entity: switch.duo2_spotlight
+            icon: mdi:flashlight
+      - type: horizontal-stack
+        cards:
+          - type: picture-glance
+            title: Kitchen
+            camera_image: camera.kitchen_fire_hd10_camera
+            camera_view: live
+            entities:
+              - entity: camera.kitchen_fire_hd10_camera
+          - type: picture-glance
+            title: Basement
+            camera_image: camera.basement_fire_hd10_camera
+            camera_view: live
+            entities:
+              - entity: camera.basement_fire_hd10_camera
+      - type: horizontal-stack
+        cards:
+          - type: picture-glance
+            title: Garage
+            camera_image: camera.garage_camera
+            camera_view: live
+            entities:
+              - entity: camera.garage_camera
+          - type: picture-glance
+            title: Driveway
+            camera_image: camera.driveway_camera
+            camera_view: live
+            entities:
+              - entity: camera.driveway_camera
