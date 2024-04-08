@@ -19,12 +19,25 @@ views:
             chips:
               - type: weather
                 entity: weather.home
-                show_temperature: true
+                show_temperature: false
             alignment: center
           - type: custom:mushroom-chips-card
             chips:
               - type: entity
-                entity: sensor.living_room_humidity
+                entity: sensor.gw2000b_outdoor_temperature
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: entity
+                entity: sensor.gw2000b_humidity
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: template
+                icon: mdi:food
+                icon_color: '#e74c3c'
+                tap_action:
+                  action: navigate
+                  navigation_path: /lovelace-phones/fitness
+                content: '{{states(''sensor.calories_remaining'') | int }}'
           - type: custom:mushroom-chips-card
             chips:
               - type: menu
@@ -97,7 +110,7 @@ views:
           - type: custom:mushroom-template-card
             icon: |-
               {% if is_state("lock.front_door_lock", 'locked') %} 
-                {% if is_state("lock.deck_door_lock", 'locked') %} 
+                {% if is_state("lock.u_bolt_pro_z_wave_smart_lock", 'locked') %} 
                   {% if is_state("lock.back_door_lock", 'locked') %} 
                     mdi:lock
                   {% else %}
@@ -111,7 +124,7 @@ views:
               {% endif %}
             icon_color: |-
               {% if is_state("lock.front_door_lock", 'locked') %} 
-                {% if is_state("lock.deck_door_lock", 'locked') %} 
+                {% if is_state("lock.u_bolt_pro_z_wave_smart_lock", 'locked') %} 
                   {% if is_state("lock.back_door_lock", 'locked') %} 
                     green
                   {% else %}
@@ -164,11 +177,12 @@ views:
               }
       - type: custom:mushroom-template-card
         primary: Rooms
-        style: |
-          ha-card { 
-            background-color: rgba(0,0,0,0);
-            box-shadow: none;
-          }
+        card_mod:
+          style: |
+            ha-card { 
+              background-color: rgba(0,0,0,0);
+              box-shadow: none;
+            }
       - type: horizontal-stack
         cards:
           - type: custom:stack-in-card
@@ -190,12 +204,13 @@ views:
                         entity: light.living_room_lights
                         use_light_color: false
                     alignment: end }
-                style: |
-                  ha-card { 
-                    background-color: rgba(0,0,0,0);
-                    box-shadow: none;
-                    border-style: hidden;
-                  }
+                card_mod:
+                  style: |
+                    ha-card { 
+                      background-color: rgba(0,0,0,0);
+                      box-shadow: none;
+                      border-style: hidden;
+                    }
               - type: custom:mini-graph-card
                 hours_to_show: 48
                 graph: line
@@ -221,11 +236,12 @@ views:
                   - value: 78
                     color: '#FF69B4'
                 points_per_hour: 1
-            style: |
-              ha-card { 
-                border-radius: 20px;
-                box-shadow: none;
-              }
+            card_mod:
+              style: |
+                ha-card { 
+                  border-radius: 20px;
+                  box-shadow: none;
+                }
           - type: custom:stack-in-card
             mode: vertical
             cards:
@@ -233,34 +249,36 @@ views:
                 mode: horizontal
                 cards:
                   - type: custom:mushroom-entity-card
-                    entity: sensor.4_in_1_sensor_air_temperature
+                    entity: sensor.switchbot_t_h_sensor_temperature
                     name: Kitchen
                     icon_type: none
                     tap_action:
                       action: navigate
                       navigation_path: kitchen
-                    style: |
-                      ha-card { 
-                        background-color: rgba(0,0,0,0);
-                        box-shadow: none;
-                      }
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          background-color: rgba(0,0,0,0);
+                          box-shadow: none;
+                        }
                   - type: custom:mushroom-chips-card
                     chips:
                       - type: light
                         entity: light.kitchen_lights
                         use_light_color: false
                     alignment: end }
-                style: |
-                  ha-card { 
-                    background-color: rgba(0,0,0,0);
-                    box-shadow: none;
-                    border-style: hidden;
-                  }
+                card_mod:
+                  style: |
+                    ha-card { 
+                      background-color: rgba(0,0,0,0);
+                      box-shadow: none;
+                      border-style: hidden;
+                    }
               - type: custom:mini-graph-card
                 hours_to_show: 48
                 graph: line
                 entities:
-                  - sensor.4_in_1_sensor_air_temperature
+                  - sensor.switchbot_t_h_sensor_temperature
                 show:
                   state: false
                   name: false
@@ -281,10 +299,11 @@ views:
                   - value: 78
                     color: '#FF69B4'
                 points_per_hour: 1
-            style: |
-              ha-card { 
-                border-radius: 20px;
-              }
+            card_mod:
+              style: |
+                ha-card { 
+                  border-radius: 20px;
+                }
       - type: horizontal-stack
         cards:
           - type: custom:stack-in-card
@@ -300,23 +319,25 @@ views:
                     tap_action:
                       action: navigate
                       navigation_path: basement
-                    style: |
-                      ha-card { 
-                        background-color: rgba(0,0,0,0);
-                        box-shadow: none;
-                      }
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          background-color: rgba(0,0,0,0);
+                          box-shadow: none;
+                        }
                   - type: custom:mushroom-chips-card
                     chips:
                       - type: light
                         entity: light.basement_lights
                         use_light_color: false
                     alignment: end }
-                style: |
-                  ha-card { 
-                    background-color: rgba(0,0,0,0);
-                    box-shadow: none;
-                    border-style: hidden;
-                  }
+                card_mod:
+                  style: |
+                    ha-card { 
+                      background-color: rgba(0,0,0,0);
+                      box-shadow: none;
+                      border-style: hidden;
+                    }
               - type: custom:mini-graph-card
                 hours_to_show: 48
                 graph: line
@@ -342,11 +363,12 @@ views:
                   - value: 78
                     color: '#FF69B4'
                 points_per_hour: 1
-            style: |
-              ha-card { 
-                border-radius: 20px;
-                box-shadow: none;
-              }
+            card_mod:
+              style: |
+                ha-card { 
+                  border-radius: 20px;
+                  box-shadow: none;
+                }
           - type: custom:stack-in-card
             mode: vertical
             cards:
@@ -354,7 +376,7 @@ views:
                 mode: horizontal
                 cards:
                   - type: custom:mushroom-entity-card
-                    entity: sensor.office_thermometer_hygrometer_temperature
+                    entity: sensor.office_thermostat_current_temperature
                     name: Office
                     hide_icon: true
                     tap_action:
@@ -371,17 +393,18 @@ views:
                         entity: light.office_light
                         use_light_color: false
                     alignment: end }
-                style: |
-                  ha-card { 
-                    background-color: rgba(0,0,0,0);
-                    box-shadow: none;
-                    border-style: hidden;
-                  }
+                card_mod:
+                  style: |
+                    ha-card { 
+                      background-color: rgba(0,0,0,0);
+                      box-shadow: none;
+                      border-style: hidden;
+                    }
               - type: custom:mini-graph-card
                 hours_to_show: 48
                 graph: line
                 entities:
-                  - sensor.office_thermometer_hygrometer_temperature
+                  - sensor.office_thermostat_current_temperature
                 show:
                   state: false
                   name: false
@@ -402,10 +425,11 @@ views:
                   - value: 80
                     color: '#FF69B4'
                 points_per_hour: 1
-            style: |
-              ha-card { 
-                border-radius: 20px;
-              }
+            card_mod:
+              style: |
+                ha-card { 
+                  border-radius: 20px;
+                }
       - type: horizontal-stack
         cards:
           - type: custom:stack-in-card
@@ -421,23 +445,25 @@ views:
                     tap_action:
                       action: navigate
                       navigation_path: master
-                    style: |
-                      ha-card { 
-                        background-color: rgba(0,0,0,0);
-                        box-shadow: none;
-                      }
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          background-color: rgba(0,0,0,0);
+                          box-shadow: none;
+                        }
                   - type: custom:mushroom-chips-card
                     chips:
                       - type: light
                         entity: light.master_bedroom_light
                         use_light_color: false
                     alignment: end }
-                style: |
-                  ha-card { 
-                    background-color: rgba(0,0,0,0);
-                    box-shadow: none;
-                    border-style: hidden;
-                  }
+                card_mod:
+                  style: |
+                    ha-card { 
+                      background-color: rgba(0,0,0,0);
+                      box-shadow: none;
+                      border-style: hidden;
+                    }
               - type: custom:mini-graph-card
                 hours_to_show: 48
                 graph: line
@@ -463,10 +489,11 @@ views:
                   - value: 78
                     color: '#FF69B4'
                 points_per_hour: 1
-            style: |
-              ha-card { 
-                border-radius: 20px;
-              }
+            card_mod:
+              style: |
+                ha-card { 
+                  border-radius: 20px;
+                }
           - type: custom:stack-in-card
             mode: vertical
             cards:
@@ -480,23 +507,25 @@ views:
                     tap_action:
                       action: navigate
                       navigation_path: corner
-                    style: |
-                      ha-card { 
-                        background-color: rgba(0,0,0,0);
-                        box-shadow: none;
-                      }
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          background-color: rgba(0,0,0,0);
+                          box-shadow: none;
+                        }
                   - type: custom:mushroom-chips-card
                     chips:
                       - type: light
                         entity: light.corner_bedroom_light
                         use_light_color: false
                     alignment: end }
-                style: |
-                  ha-card { 
-                    background-color: rgba(0,0,0,0);
-                    box-shadow: none;
-                    border-style: hidden;
-                  }
+                card_mod:
+                  style: |
+                    ha-card { 
+                      background-color: rgba(0,0,0,0);
+                      box-shadow: none;
+                      border-style: hidden;
+                    }
               - type: custom:mini-graph-card
                 hours_to_show: 48
                 graph: line
@@ -522,10 +551,11 @@ views:
                   - value: 78
                     color: '#FF69B4'
                 points_per_hour: 1
-            style: |
-              ha-card { 
-                border-radius: 20px;
-              }
+            card_mod:
+              style: |
+                ha-card { 
+                  border-radius: 20px;
+                }
       - type: horizontal-stack
         cards:
           - type: custom:stack-in-card
@@ -541,23 +571,25 @@ views:
                     tap_action:
                       action: navigate
                       navigation_path: front
-                    style: |
-                      ha-card { 
-                        background-color: rgba(0,0,0,0);
-                        box-shadow: none;
-                      }
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          background-color: rgba(0,0,0,0);
+                          box-shadow: none;
+                        }
                   - type: custom:mushroom-chips-card
                     chips:
                       - type: light
                         entity: light.front_bedroom_light
                         use_light_color: false
                     alignment: end }
-                style: |
-                  ha-card { 
-                    background-color: rgba(0,0,0,0);
-                    box-shadow: none;
-                    border-style: hidden;
-                  }
+                card_mod:
+                  style: |
+                    ha-card { 
+                      background-color: rgba(0,0,0,0);
+                      box-shadow: none;
+                      border-style: hidden;
+                    }
               - type: custom:mini-graph-card
                 hours_to_show: 48
                 graph: line
@@ -583,10 +615,11 @@ views:
                   - value: 78
                     color: '#FF69B4'
                 points_per_hour: 1
-            style: |
-              ha-card { 
-                border-radius: 20px;
-              }
+            card_mod:
+              style: |
+                ha-card { 
+                  border-radius: 20px;
+                }
           - type: custom:stack-in-card
             mode: vertical
             cards:
@@ -600,23 +633,25 @@ views:
                     tap_action:
                       action: navigate
                       navigation_path: garage
-                    style: |
-                      ha-card { 
-                        background-color: rgba(0,0,0,0);
-                        box-shadow: none;
-                      }
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          background-color: rgba(0,0,0,0);
+                          box-shadow: none;
+                        }
                   - type: custom:mushroom-chips-card
                     chips:
                       - type: light
                         entity: light.garage_lights
                         use_light_color: false
                     alignment: end }
-                style: |
-                  ha-card { 
-                    background-color: rgba(0,0,0,0);
-                    box-shadow: none;
-                    border-style: hidden;
-                  }
+                card_mod:
+                  style: |
+                    ha-card { 
+                      background-color: rgba(0,0,0,0);
+                      box-shadow: none;
+                      border-style: hidden;
+                    }
               - type: custom:mini-graph-card
                 hours_to_show: 48
                 graph: line
@@ -642,10 +677,11 @@ views:
                   - value: 78
                     color: '#FF69B4'
                 points_per_hour: 1
-            style: |
-              ha-card { 
-                border-radius: 20px;
-              }
+            card_mod:
+              style: |
+                ha-card { 
+                  border-radius: 20px;
+                }
       - type: horizontal-stack
         cards:
           - type: custom:stack-in-card
@@ -661,23 +697,25 @@ views:
                     tap_action:
                       action: navigate
                       navigation_path: guestroom
-                    style: |
-                      ha-card { 
-                        background-color: rgba(0,0,0,0);
-                        box-shadow: none;
-                      }
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          background-color: rgba(0,0,0,0);
+                          box-shadow: none;
+                        }
                   - type: custom:mushroom-chips-card
                     chips:
                       - type: light
                         entity: light.guest_room_light
                         use_light_color: false
                     alignment: end }
-                style: |
-                  ha-card { 
-                    background-color: rgba(0,0,0,0);
-                    box-shadow: none;
-                    border-style: hidden;
-                  }
+                card_mod:
+                  style: |
+                    ha-card { 
+                      background-color: rgba(0,0,0,0);
+                      box-shadow: none;
+                      border-style: hidden;
+                    }
               - type: custom:mini-graph-card
                 hours_to_show: 48
                 graph: line
@@ -703,21 +741,23 @@ views:
                   - value: 78
                     color: '#FF69B4'
                 points_per_hour: 1
-            style: |
-              ha-card { 
-                border-radius: 20px;
-              }
+            card_mod:
+              style: |
+                ha-card { 
+                  border-radius: 20px;
+                }
           - type: custom:mushroom-title-card
             name: ' '
       - type: vertical-stack
         cards:
           - type: custom:mushroom-template-card
             primary: Bathrooms
-            style: |
-              ha-card { 
-                background-color: rgba(0,0,0,0);
-                box-shadow: none;
-              }
+            card_mod:
+              style: |
+                ha-card { 
+                  background-color: rgba(0,0,0,0);
+                  box-shadow: none;
+                }
           - type: horizontal-stack
             cards:
               - type: custom:stack-in-card
@@ -727,34 +767,36 @@ views:
                     mode: horizontal
                     cards:
                       - type: custom:mushroom-entity-card
-                        entity: sensor.bathroom_th_sensor_temperature
+                        entity: sensor.bathroom_thermostat_current_temperature
                         name: Upstairs
                         hide_icon: true
                         tap_action:
                           action: navigate
                           navigation_path: bathroom
-                        style: |
-                          ha-card { 
-                            background-color: rgba(0,0,0,0);
-                            box-shadow: none;
-                          }
+                        card_mod:
+                          style: |
+                            ha-card { 
+                              background-color: rgba(0,0,0,0);
+                              box-shadow: none;
+                            }
                       - type: custom:mushroom-chips-card
                         chips:
                           - type: light
                             entity: light.basement_bathroom_lights
                             use_light_color: false
                         alignment: end }
-                    style: |
-                      ha-card { 
-                        background-color: rgba(0,0,0,0);
-                        box-shadow: none;
-                        border-style: hidden;
-                      }
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          background-color: rgba(0,0,0,0);
+                          box-shadow: none;
+                          border-style: hidden;
+                        }
                   - type: custom:mini-graph-card
                     hours_to_show: 48
                     graph: line
                     entities:
-                      - sensor.bathroom_th_sensor_temperature
+                      - sensor.bathroom_thermostat_current_temperature
                     show:
                       state: false
                       name: false
@@ -775,10 +817,11 @@ views:
                       - value: 78
                         color: '#FF69B4'
                     points_per_hour: 1
-                style: |
-                  ha-card { 
-                    border-radius: 20px;
-                  }
+                card_mod:
+                  style: |
+                    ha-card { 
+                      border-radius: 20px;
+                    }
               - type: custom:stack-in-card
                 mode: vertical
                 cards:
@@ -792,23 +835,25 @@ views:
                         tap_action:
                           action: navigate
                           navigation_path: basementbathroom
-                        style: |
-                          ha-card { 
-                            background-color: rgba(0,0,0,0);
-                            box-shadow: none;
-                          }
+                        card_mod:
+                          style: |
+                            ha-card { 
+                              background-color: rgba(0,0,0,0);
+                              box-shadow: none;
+                            }
                       - type: custom:mushroom-chips-card
                         chips:
                           - type: light
                             entity: light.basement_bathroom_lights
                             use_light_color: false
                         alignment: end }
-                    style: |
-                      ha-card { 
-                        background-color: rgba(0,0,0,0);
-                        box-shadow: none;
-                        border-style: hidden;
-                      }
+                    card_mod:
+                      style: |
+                        ha-card { 
+                          background-color: rgba(0,0,0,0);
+                          box-shadow: none;
+                          border-style: hidden;
+                        }
                   - type: custom:mini-graph-card
                     hours_to_show: 48
                     graph: line
@@ -834,19 +879,21 @@ views:
                       - value: 78
                         color: '#FF69B4'
                     points_per_hour: 1
-                style: |
-                  ha-card { 
-                    border-radius: 20px;
-                  }
+                card_mod:
+                  style: |
+                    ha-card { 
+                      border-radius: 20px;
+                    }
       - type: vertical-stack
         cards:
           - type: custom:mushroom-template-card
             primary: Doors
-            style: |
-              ha-card { 
-                background-color: rgba(0,0,0,0);
-                box-shadow: none;
-              }
+            card_mod:
+              style: |
+                ha-card { 
+                  background-color: rgba(0,0,0,0);
+                  box-shadow: none;
+                }
           - type: custom:stack-in-card
             mode: horizontal
             cards:
@@ -862,10 +909,11 @@ views:
                   else 'mdi:door-closed'}}
                 layout: vertical
                 primary: Baby
-                style: |
-                  ha-card { 
-                    box-shadow: none;
-                  }
+                card_mod:
+                  style: |
+                    ha-card { 
+                      box-shadow: none;
+                    }
               - type: custom:mushroom-template-card
                 secondary: >-
                   {{'open' if is_state('binary_sensor.front_door_sensor','on')
@@ -877,10 +925,11 @@ views:
                   'mdi:door-closed'}}
                 layout: vertical
                 primary: Back
-                style: |
-                  ha-card { 
-                    box-shadow: none;
-                  }
+                card_mod:
+                  style: |
+                    ha-card { 
+                      box-shadow: none;
+                    }
               - type: custom:mushroom-template-card
                 entity: binary_sensor.front_door_sensor
                 layout: vertical
@@ -892,10 +941,11 @@ views:
                 secondary: >-
                   {{'open' if is_state('binary_sensor.front_door_sensor','on')
                   else 'closed'}}
-                style: |
-                  ha-card { 
-                    box-shadow: none;
-                  }
+                card_mod:
+                  style: |
+                    ha-card { 
+                      box-shadow: none;
+                    }
               - type: custom:mushroom-template-card
                 entity: binary_sensor.sengled_deck_door
                 layout: vertical
@@ -907,14 +957,16 @@ views:
                 secondary: >-
                   {{'open' if is_state('binary_sensor.sengled_deck_door','on')
                   else 'closed'}}
-                style: |
-                  ha-card { 
-                    box-shadow: none;
-                  }
-            style: |
-              ha-card { 
-                border-radius: 20px;
-              }
+                card_mod:
+                  style: |
+                    ha-card { 
+                      box-shadow: none;
+                    }
+            card_mod:
+              style: |
+                ha-card { 
+                  border-radius: 20px;
+                }
   - theme: Backend-selected
     icon: mdi:sofa
     path: livingroom
@@ -1008,6 +1060,23 @@ views:
             show_color_control: false
             icon: ''
             entity: light.porch_light
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-light-card
+            use_light_color: false
+            show_brightness_control: false
+            show_color_temp_control: false
+            show_color_control: false
+            icon: bha:dome-light
+            entity: light.hallway_light
+            name: Hallway
+          - type: custom:mushroom-light-card
+            name: Porch
+            use_light_color: false
+            show_brightness_control: true
+            show_color_temp_control: false
+            show_color_control: false
+            icon: ''
       - type: custom:mushroom-template-card
         primary: Curtains
         style: |
@@ -1492,12 +1561,12 @@ views:
           - type: custom:mushroom-chips-card
             chips:
               - type: entity
-                entity: sensor.office_thermometer_hygrometer_temperature
+                entity: sensor.office_thermostat_current_temperature
             alignment: end
           - type: custom:mushroom-chips-card
             chips:
               - type: entity
-                entity: sensor.office_thermometer_hygrometer_humidity
+                entity: sensor.office_thermostat_current_humidity
             alignment: end
           - type: custom:mushroom-chips-card
             chips:
@@ -1562,6 +1631,21 @@ views:
             use_light_color: true
             show_brightness_control: true
             show_color_control: true
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-light-card
+            entity: light.office_backlight_bulb_1
+            icon: ''
+            use_light_color: true
+            show_brightness_control: true
+            show_color_control: true
+            name: Backlight 1
+          - type: custom:mushroom-light-card
+            entity: light.office_backlight_bulb_2
+            use_light_color: true
+            show_brightness_control: true
+            show_color_control: true
+            name: Backlight 2
       - type: horizontal-stack
         cards:
           - type: custom:mushroom-light-card
@@ -1777,9 +1861,9 @@ views:
             multiline_secondary: true
             icon_color: purple
           - type: custom:mushroom-entity-card
-            entity: camera.backyard_camera
             name: Printer Cam
             layout: vertical
+            entity: camera.bench_camera_profile000_mainstream
   - theme: Backend-selected
     icon: mdi:bed-king
     path: master
@@ -1869,7 +1953,7 @@ views:
                 icon: mdi:roller-shade
                 hold_action:
                   action: toggle
-                entity: cover.master_bedroom_shade_1
+                entity: cover.master_bedroom_shade_1_cover
               - type: custom:mushroom-cover-card
                 icon: mdi:roller-shade
                 show_buttons_control: false
@@ -1879,7 +1963,7 @@ views:
                   action: more-info
                 hold_action:
                   action: toggle
-                entity: cover.master_bedroom_shade_2
+                entity: cover.master_bedroom_shade_2_cover
       - type: vertical-stack
         cards:
           - type: custom:mushroom-template-card
@@ -2118,11 +2202,11 @@ views:
           - type: horizontal-stack
             cards:
               - type: custom:mushroom-light-card
-                entity: light.front_bedroom_light
+                entity: light.front_bedroom_light_main_light
                 show_brightness_control: false
                 name: Main Light
               - type: custom:mushroom-light-card
-                entity: light.front_bedroom_night_light
+                entity: light.front_bedroom_light_night_light
                 show_brightness_control: true
                 name: Night Light
                 icon: mdi:alarm-light
@@ -2467,7 +2551,7 @@ views:
           - type: horizontal-stack
             cards:
               - type: custom:mushroom-light-card
-                entity: light.bathroom_night_light
+                entity: light.wled_bathroom_vanity
                 icon: mdi:alarm-light-outline
                 name: Night LIght
               - type: custom:mushroom-fan-card
@@ -2767,10 +2851,24 @@ views:
             entity: camera.garage_camera
             layout: vertical
             name: Garage
-      - type: picture-glance
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            layout: vertical
+            entity: camera.bench_camera_profile000_mainstream
+            name: 3D Printer
+          - type: custom:mushroom-entity-card
+            layout: vertical
+            name: Driveway
+            entity: camera.driveway
+          - type: custom:mushroom-entity-card
+            entity: camera.garage_camera
+            layout: vertical
+            name: Garage
+      - camera_view: live
+        type: picture-glance
         title: Backyard
-        camera_image: camera.duo2
-        camera_view: live
+        camera_image: camera.backyard_camera
         entities:
           - entity: switch.duo2_spotlight
             icon: mdi:flashlight
@@ -2802,3 +2900,110 @@ views:
             camera_view: live
             entities:
               - entity: camera.driveway_camera
+  - title: Fitness
+    path: fitness
+    icon: mdi:cards-heart
+    visible: []
+    badges: []
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: back
+            alignment: start
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: entity
+                entity: alarm_control_panel.blink_home
+            alignment: center
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: entity
+                entity: alarm_control_panel.alexa_guard_a7ffa
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: menu
+            alignment: end
+      - type: custom:mushroom-title-card
+        title: ''
+        subtitle: Health Data
+        alignment: center
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            icon: mdi:weight-pound
+            entity: sensor.basement_bathroom_scale_weight_over_100
+            name: Weight
+          - type: tile
+            entity: sensor.google_fit_steps
+            name: Steps
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            icon: ''
+            entity: sensor.calories_in
+            name: Consumed
+          - type: tile
+            entity: sensor.calories
+            name: Burned
+      - type: horizontal-stack
+        cards:
+          - type: tile
+            icon: ''
+            entity: input_number.calorie_goal
+            name: Goal
+          - type: tile
+            entity: sensor.calories_remaining
+            name: Remaining
+            icon: mdi:food-apple
+      - type: custom:mini-graph-card
+        name: Calorie Usage
+        entities:
+          - entity: sensor.calories_in
+            show_fill: false
+            name: Intake
+          - entity: sensor.calories_remaining
+            show_fill: false
+            name: Remaining
+          - entity: input_number.calorie_goal
+            show_fill: true
+            show_line: false
+            name: Limit
+            show_legend: false
+        show_fill: false
+        hours_to_show: 24
+        smoothing: false
+        line_thickness: 0.25
+        font_size_header: 11
+        line_color:
+          - '#e74c3c'
+          - gold
+          - white
+        show:
+          title: false
+          icon: false
+          state: false
+      - type: custom:mini-graph-card
+        name: Weight
+        entities:
+          - entity: sensor.basement_bathroom_scale_weight
+            show_fill: false
+            name: Intake
+          - entity: input_number.weight_goal
+            show_fill: true
+            show_line: false
+            name: Limit
+            show_legend: false
+        show_fill: false
+        hours_to_show: 120
+        smoothing: true
+        line_thickness: 0.25
+        font_size_header: 11
+        line_color:
+          - '#e74c3c'
+          - white
+        show:
+          title: false
+          icon: false
+          state: false
