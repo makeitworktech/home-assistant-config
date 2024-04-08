@@ -5,7 +5,6 @@ views:
     icon: mdi:tablet-dashboard
     layout:
       width: 350
-    type: custom:masonry-layout
     badges: []
     cards:
       - type: vertical-stack
@@ -14,10 +13,11 @@ views:
             cards:
               - type: markdown
                 content: <ha-icon icon="mdi:account-multiple"></ha-icon> Family
-                style: |
-                  ha-card { 
-                    font-size: 20px; 
-                  }
+                card-mod:
+                  style: |
+                    ha-card { 
+                      font-size: 25px; 
+                    }
               - type: horizontal-stack
                 mode: horizontal
                 cards:
@@ -41,7 +41,7 @@ views:
                           - left: 4%
                           - top: 4%
                           - color: >-
-                              [[[ if (states["device_tracker.pixel_6_pro"].state
+                              [[[ if (states["device_tracker.pixel_7_pro"].state
                               == "not_home") return "#e45649"; else return
                               "#50A14F"; ]]]
                         battery:
@@ -51,20 +51,20 @@ views:
                           - top: 4%
                           - color: >-
                               [[[ if
-                              (states["sensor.pixel_6_pro_battery_level"].state
+                              (states["sensor.pixel_7_pro_battery_level"].state
                               <= 30) return "#e45649"; if
-                              (states["sensor.pixel_6_pro_battery_level"].state
+                              (states["sensor.pixel_7_pro_battery_level"].state
                               <= 50) return "#ffa229"; else return "#50A14F";
                               ]]]
                     custom_fields:
                       location: |
                         [[[
-                          if (states["device_tracker.pixel_6_pro"].state == "not_home")
+                          if (states["device_tracker.pixel_7_pro"].state == "not_home")
                             return `<ha-icon
                               icon="mdi:home-export-outline"
                               style="width: 22px; height: 22px;">
                               </ha-icon>`
-                          if (states["device_tracker.pixel_6_pro"].state == "Work")
+                          if (states["device_tracker.pixel_7_pro"].state == "Work")
                             return `<ha-icon
                               icon="mdi:office-building"
                               style="width: 22px; height: 22px;">
@@ -80,12 +80,13 @@ views:
                           return `<ha-icon
                             icon="mdi:battery"
                             style="width: 20px; height: 20px;"></ha-icon
-                            <span>${states['sensor.pixel_6_pro_battery_level'].state}%</span>`
+                            <span>${states['sensor.pixel_7_pro_battery_level'].state}%</span>`
                         ]]]
-                    style: |
-                      ha-card { 
-                        background: rgba(10, 10, 10, 0)
-                      }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          background: rgba(10, 10, 10, 0)
+                        }
                   - type: custom:button-card
                     entity: person.courtney
                     aspect_ratio: 4/4
@@ -146,21 +147,25 @@ views:
                             style="width: 20px; height: 20px;"></ha-icon
                             <span>${states['sensor.pixel_6_battery_level'].state}%</span>`
                         ]]]
-                    style: |
-                      ha-card { 
-                        background: rgba(10, 10, 10, 0)
-                      }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          background: rgba(10, 10, 10, 0)
+                        }
           - type: custom:swipe-card
+            parameters:
+              effect: coverflow
             cards:
               - type: custom:vertical-stack-in-card
                 cards:
                   - type: markdown
                     content: <ha-icon icon="mdi:lightbulb"></ha-icon> Lighting
-                    style: |
-                      ha-card { 
-                        background: rgba(0,0,0,0);
-                        box-shadow: none;
-                      }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          background: rgba(0,0,0,0);
+                          box-shadow: none;
+                        }
                   - type: custom:stack-in-card
                     mode: horizontal
                     cards:
@@ -174,10 +179,6 @@ views:
                           - value: 'off'
                             color: rgba(0,0,0,0.3)
                         icon: mdi:track-light
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                          }
                       - type: custom:button-card
                         entity: light.kitchen_sink_light
                         tap_action:
@@ -187,10 +188,6 @@ views:
                         state:
                           - value: 'off'
                             color: rgba(0,0,0,0.3)
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                          }
                       - type: custom:button-card
                         entity: light.kitchen_light_strips
                         tap_action:
@@ -200,14 +197,11 @@ views:
                         state:
                           - value: 'off'
                             color: rgba(0,0,0,0.3)
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                          }
-                    style: |
-                      ha-card { 
-                        background: rgba(0,0,0,0);
-                      }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          background: rgba(0,0,0,0);
+                        }
                   - type: custom:stack-in-card
                     mode: horizontal
                     cards:
@@ -218,11 +212,12 @@ views:
                             color: rgba(0,0,0,0.3)
                         icon: mdi:ceiling-fan
                         name: Kitchen Fan
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                            height: 110px;
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                              height: 110px;
+                            }
                       - type: custom:button-card
                         entity: light.kitchen_fan_light_light
                         state:
@@ -230,11 +225,12 @@ views:
                             color: rgba(0,0,0,0.3)
                         icon: mdi:ceiling-fan-light
                         name: Kitchen Fan Light
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                            height: 110px;
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                              height: 110px;
+                            }
                       - type: custom:button-card
                         entity: light.dining_room_light
                         state:
@@ -242,28 +238,32 @@ views:
                             color: rgba(0,0,0,0.3)
                         icon: mdi:chandelier
                         name: Dining Room Light
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                            height: 110px;
-                          }
-                    style: |
-                      ha-card { 
-                        background: rgba(0,0,0,0);
-                        height: 110px;
-                      }
-                style: |
-                  ha-card { 
-                    font-size: 25px;
-                  }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                              height: 110px;
+                            }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          background: rgba(0,0,0,0);
+                          height: 110px;
+                        }
+                card-mod:
+                  style: |
+                    ha-card { 
+                      font-size: 25px;
+                    }
               - type: custom:vertical-stack-in-card
                 cards:
                   - type: markdown
                     content: <ha-icon icon="mdi:lightbulb"></ha-icon>  Living Room
-                    style: |
-                      ha-card { 
-                        background: rgba(0,0,0,0);
-                      }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          background: rgba(0,0,0,0);
+                        }
                   - type: custom:stack-in-card
                     mode: horizontal
                     cards:
@@ -275,10 +275,11 @@ views:
                           - value: 'off'
                             color: rgba(0,0,0,0.3)
                         icon: mdi:lamp
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                            }
                       - type: custom:button-card
                         entity: light.living_room_reading_lights
                         tap_action:
@@ -288,10 +289,11 @@ views:
                         state:
                           - value: 'off'
                             color: rgba(0,0,0,0.3)
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                            }
                       - type: custom:button-card
                         entity: switch.stairway_light
                         tap_action:
@@ -301,14 +303,16 @@ views:
                         state:
                           - value: 'off'
                             color: rgba(0,0,0,0.3)
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                          }
-                    style: |
-                      ha-card { 
-                        background: rgba(0,0,0,0);
-                      }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                            }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          background: rgba(0,0,0,0);
+                        }
                   - type: custom:stack-in-card
                     mode: horizontal
                     cards:
@@ -319,11 +323,12 @@ views:
                             color: rgba(0,0,0,0.3)
                         icon: mdi:lightbulb-multiple
                         name: All Lights
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                            height: 110px;
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                              height: 110px;
+                            }
                       - type: custom:button-card
                         entity: cover.living_room_curtains
                         state:
@@ -331,29 +336,35 @@ views:
                             color: rgba(0,0,0,0.3)
                         icon: mdi:curtains
                         name: Curtains
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                            height: 110px;
-                          }
-                    style: |
-                      ha-card { 
-                        height: 110px;
-                        background: rgba(0,0,0,0);
-                      }
-                style: |
-                  ha-card { 
-                    font-size: 25px;
-                  }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                              height: 80px;
+                            }
+                      - type: custom:mushroom-title-card
+                        title: ' '
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          height: 110px;
+                          background: rgba(0,0,0,0);
+                        }
+                card-mod:
+                  style: |
+                    ha-card { 
+                      font-size: 25px;
+                    }
               - type: custom:vertical-stack-in-card
                 cards:
                   - type: markdown
                     content: <ha-icon icon="mdi:curtains"></ha-icon> Window Coverings
-                    style: |
-                      ha-card { 
-                        background: rgba(0,0,0,0);
-                        box-shadow: none;
-                      }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          background: rgba(0,0,0,0);
+                          box-shadow: none;
+                        }
                   - type: custom:stack-in-card
                     mode: horizontal
                     cards:
@@ -364,11 +375,12 @@ views:
                             color: rgba(0,0,0,0.3)
                         icon: mdi:curtains
                         name: Living Room
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                            height: 110px;
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                              height: 110px;
+                            }
                       - type: custom:button-card
                         entity: cover.dining_room_shade
                         state:
@@ -376,11 +388,12 @@ views:
                             color: rgba(0,0,0,0.3)
                         icon: mdi:roller-shade
                         name: Dining Room
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                            height: 110px;
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                              height: 110px;
+                            }
                       - type: custom:button-card
                         entity: cover.front_bedroom_curtain_1
                         state:
@@ -388,11 +401,12 @@ views:
                             color: rgba(0,0,0,0.3)
                         icon: mdi:curtains
                         name: Front Bedroom
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                            height: 110px;
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                              height: 110px;
+                            }
                   - type: custom:stack-in-card
                     mode: horizontal
                     cards:
@@ -403,11 +417,12 @@ views:
                             color: rgba(0,0,0,0.3)
                         icon: mdi:roller-shade
                         name: Master Bedroom
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                            height: 110px;
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                              height: 110px;
+                            }
                       - type: custom:button-card
                         entity: cover.master_bedroom_smartwings_shade_2
                         state:
@@ -415,11 +430,12 @@ views:
                             color: rgba(0,0,0,0.3)
                         icon: mdi:roller-shade
                         name: Master Bedroom 2
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                            height: 110px;
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                              height: 110px;
+                            }
                       - type: custom:button-card
                         entity: cover.corner_bedroom_curtains
                         state:
@@ -430,109 +446,123 @@ views:
                             color: rgba(0,0,0,0.3)
                             icon: mdi:curtains
                         name: Corner Bedroom
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                            height: 110px;
-                          }
-                    style: |
-                      ha-card { 
-                        background: rgba(0,0,0,0);
-                      }
-                style: |
-                  ha-card { 
-                    font-size: 25px;
-                  }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                              height: 110px;
+                            }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          background: rgba(0,0,0,0);
+                          height: 110px;
+                        }
+                card-mod:
+                  style: |
+                    ha-card { 
+                      font-size: 25px;
+                    }
           - type: custom:swipe-card
             cards:
               - type: custom:vertical-stack-in-card
                 cards:
                   - type: markdown
                     content: <ha-icon icon="mdi:camera"></ha-icon> Cameras
-                    style: |
-                      ha-card { 
-                        background: rgba(0,0,0,0);
-                      }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          background: rgba(0,0,0,0);
+                        }
                   - type: horizontal-stack
                     cards:
                       - type: custom:button-card
-                        entity: camera.nursery_camera
+                        entity: camera.front_bedroom_camera
                         icon: mdi:video
-                        name: Nursery
-                        style: |
-                          ha-card {
-                            box-shadow: none;
-                            background: rgba(10, 10, 10, 0);
-                            height: 110px;
-                          }
+                        name: Front Bedroom
+                        card-mod:
+                          style: |
+                            ha-card {
+                              box-shadow: none;
+                              background: rgba(10, 10, 10, 0);
+                              height: 110px;
+                            }
                       - type: custom:button-card
                         entity: camera.corner_bedroom_camera
                         icon: mdi:video
                         name: Corner Bedroom
-                        style: |
-                          ha-card {
-                            box-shadow: none;
-                            background: rgba(10, 10, 10, 0);
-                            height: 110px;
-                          }
+                        card-mod:
+                          style: |
+                            ha-card {
+                              box-shadow: none;
+                              background: rgba(10, 10, 10, 0);
+                              height: 110px;
+                            }
                       - type: custom:button-card
                         entity: camera.driveway_camera
                         icon: mdi:video
                         name: Driveway
-                        style: |
-                          ha-card {
-                            box-shadow: none;
-                            background: rgba(10, 10, 10, 0);
-                            height: 110px;
-                          }
-                style: |
-                  ha-card { 
-                    font-size: 25px;
-                  }
+                        card-mod:
+                          style: |
+                            ha-card {
+                              box-shadow: none;
+                              background: rgba(10, 10, 10, 0);
+                              height: 110px;
+                            }
+                card-mod:
+                  style: |
+                    ha-card { 
+                      font-size: 25px;
+                    }
               - type: custom:vertical-stack-in-card
                 cards:
                   - type: markdown
                     content: <ha-icon icon="mdi:camera"></ha-icon> Cameras (cont)
-                    style: |
-                      ha-card { 
-                        background: rgba(0,0,0,0);
-                      }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          background: rgba(0,0,0,0);
+                        }
                   - type: horizontal-stack
                     cards:
                       - type: custom:button-card
                         entity: camera.kitchen_fire_hd10_camera
                         icon: mdi:video
                         name: Kitchen
-                        style: |
-                          ha-card {
-                            box-shadow: none;
-                            background: rgba(10, 10, 10, 0);
-                            height: 110px;
-                          }
+                        card-mod:
+                          style: |
+                            ha-card {
+                              box-shadow: none;
+                              background: rgba(10, 10, 10, 0);
+                              height: 110px;
+                            }
                       - type: custom:button-card
-                        entity: camera.camera.gs7_camera
+                        entity: camera.office_camera
                         icon: mdi:video
                         name: Office
-                        style: |
-                          ha-card {
-                            box-shadow: none;
-                            background: rgba(10, 10, 10, 0);
-                            height: 110px;
-                          }
+                        card-mod:
+                          style: |
+                            ha-card {
+                              box-shadow: none;
+                              background: rgba(10, 10, 10, 0);
+                              height: 110px;
+                            }
                       - type: custom:button-card
                         entity: camera.basement_fire_hd10_camera
                         icon: mdi:video
                         name: Basement
-                        style: |
-                          ha-card {
-                            box-shadow: none;
-                            background: rgba(10, 10, 10, 0);
-                            height: 110px;
-                          }
-                style: |
-                  ha-card { 
-                    font-size: 25px;
-                  }
+                        card-mod:
+                          style: |
+                            ha-card {
+                              box-shadow: none;
+                              background: rgba(10, 10, 10, 0);
+                              height: 110px;
+                            }
+                card-mod:
+                  style: |
+                    ha-card { 
+                      font-size: 25px;
+                    }
       - type: vertical-stack
         cards:
           - type: horizontal-stack
@@ -541,11 +571,12 @@ views:
                 cards:
                   - type: markdown
                     content: <ha-icon icon="mdi:mailbox"></ha-icon> Mailbox
-                    style: |
-                      ha-card { 
-                        background-color: rgba(0,0,0,0);
-                        font-size: 25px;
-                      }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          background-color: rgba(0,0,0,0);
+                          font-size: 25px;
+                        }
                   - type: custom:button-card
                     entity: input_boolean.mail_present
                     show_state: false
@@ -563,24 +594,27 @@ views:
                             var time_delivered = states["sensor.mailbox_status"].state;
                             return 'Mail delivered at ' + time_delivered 
                           ]]]
-                    style: |
-                      ha-card { 
-                        box-shadow: none;
-                        background: rgba(0,0,0,0);
-                        height: 110px;
-                      }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          box-shadow: none;
+                          background: rgba(0,0,0,0);
+                          height: 110px;
+                        }
               - type: custom:vertical-stack-in-card
                 cards:
                   - type: markdown
                     content: <ha-icon icon="mdi:robot-vacuum"></ha-icon> Betsy
-                    style: |
-                      ha-card { 
-                        background-color: rgba(0,0,0,0);
-                        font-size: 25px;
-                      }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          background-color: rgba(0,0,0,0);
+                          font-size: 25px;
+                        }
                   - type: custom:button-card
                     entity: vacuum.betsy
                     show_name: false
+                    card-mod: null
                     style: |
                       ha-card { 
                         box-shadow: none;
@@ -597,19 +631,21 @@ views:
                     cards:
                       - type: markdown
                         content: <ha-icon icon="mdi:clock"></ha-icon> Time
-                        style: |
-                          ha-card { 
-                            background-color: rgba(0,0,0,0);
-                            font-size: 25px;
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background-color: rgba(0,0,0,0);
+                              font-size: 25px;
+                            }
                       - type: custom:digital-clock
-                        style: |
-                          ha-card {
-                            box-shadow: none;
-                            background: rgba(10, 10, 10, 0);
-                            font-size: 30px;
-                            height: 190px;
-                          }
+                        card-mod:
+                          style: |
+                            ha-card {
+                              box-shadow: none;
+                              background: rgba(10, 10, 10, 0);
+                              font-size: 30px;
+                              height: 190px;
+                            }
                   - type: custom:vertical-stack-in-card
                     cards:
                       - type: markdown
@@ -617,24 +653,26 @@ views:
                           <ha-icon icon="mdi:white-balance-sunny"></ha-icon>
                           Weather  -  {{
                                       state_attr('weather.home','temperature') }} °F
-                        style: |
-                          ha-card { 
-                            background: rgba(10, 10, 10, 0);
-                            font-size: 25px;
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(10, 10, 10, 0);
+                              font-size: 25px;
+                            }
                       - type: custom:weather-card
                         entity: weather.home
                         number_of_forecasts: '5'
                         current: false
                         hourly_forecast: false
                         details: false
-                        style: |
-                          ha-card { 
-                            background: rgba(10, 10, 10, 0);
-                            height: 152px;
-                            box-shadow: none;
-                            font-size: 20px;
-                           }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(10, 10, 10, 0);
+                              height: 152px;
+                              box-shadow: none;
+                              font-size: 20px;
+                             }
           - type: custom:swipe-card
             parameters:
               effect: coverflow
@@ -643,10 +681,11 @@ views:
                 cards:
                   - type: markdown
                     content: <ha-icon icon="mdi:amazon-alexa"></ha-icon> Announcements
-                    style: |
-                      ha-card { 
-                        background: rgba(0,0,0,0);
-                      }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          background: rgba(0,0,0,0);
+                        }
                   - type: horizontal-stack
                     cards:
                       - type: custom:button-card
@@ -654,12 +693,13 @@ views:
                           action: toggle
                         entity: script.announcement_time_for_supper
                         name: Supper Time!
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                            box-shadow: none;
-                            height: 120px;
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                              box-shadow: none;
+                              height: 120px;
+                            }
                       - type: custom:button-card
                         tap_action:
                           action: call-service
@@ -671,12 +711,13 @@ views:
                           target: {}
                         icon: mdi:bed
                         name: Bedtime
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                            box-shadow: none;
-                            height: 120px;
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                              box-shadow: none;
+                              height: 120px;
+                            }
                       - type: custom:button-card
                         tap_action:
                           action: call-service
@@ -688,12 +729,13 @@ views:
                           target: {}
                         icon: mdi:bell
                         name: Time for School
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                            box-shadow: none;
-                            height: 120px;
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                              box-shadow: none;
+                              height: 120px;
+                            }
                   - type: custom:stack-in-card
                     mode: horizontal
                     cards:
@@ -702,12 +744,13 @@ views:
                           action: toggle
                         entity: script.announcement_time_for_lunch
                         name: Lunch Time!
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                            box-shadow: none;
-                            height: 120px;
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                              box-shadow: none;
+                              height: 120px;
+                            }
                       - type: custom:button-card
                         tap_action:
                           action: call-service
@@ -721,12 +764,13 @@ views:
                           target: {}
                         icon: mdi:video
                         name: Last Episode
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                            box-shadow: none;
-                            height: 120px;
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                              box-shadow: none;
+                              height: 120px;
+                            }
                       - type: custom:button-card
                         tap_action:
                           action: call-service
@@ -738,32 +782,36 @@ views:
                           target: {}
                         icon: mdi:stairs
                         name: Come Upstairs
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                            box-shadow: none;
-                            height: 120px;
-                          }
-                    style: |
-                      ha-card { 
-                        background: rgba(0,0,0,0);
-                        font-size: 25px;
-                      }
-                style: |
-                  ha-card { 
-                    font-size: 25px;
-                  }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                              box-shadow: none;
+                              height: 120px;
+                            }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          background: rgba(0,0,0,0);
+                          font-size: 25px;
+                        }
+                card-mod:
+                  style: |
+                    ha-card { 
+                      font-size: 25px;
+                    }
               - type: custom:vertical-stack-in-card
                 cards:
                   - type: markdown
                     content: >-
                       <ha-icon icon="mdi:amazon-alexa"></ha-icon> Custom
                       Announcements
-                    style: |
-                      ha-card { 
-                        background: rgba(0,0,0,0);
-                        font-size: 25px;
-                      }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          background: rgba(0,0,0,0);
+                          font-size: 25px;
+                        }
                   - type: custom:mini-media-player
                     icon: mdi:amazon-alexa
                     toggle_power: false
@@ -772,10 +820,11 @@ views:
                     tts:
                       platform: alexa
                       type: tts
-                    style: |
-                      ha-card { 
-                        margin: 0px 0px 40px 0px;
-                      }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          margin: 0px 0px 40px 0px;
+                        }
                   - type: custom:mini-media-player
                     icon: mdi:amazon-alexa
                     toggle_power: false
@@ -784,10 +833,11 @@ views:
                     tts:
                       platform: alexa
                       type: tts
-                    style: |
-                      ha-card { 
-                        margin: 0px 0px 40px 0px;
-                      }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          margin: 0px 0px 40px 0px;
+                        }
       - type: vertical-stack
         cards:
           - type: custom:swipe-card
@@ -799,17 +849,18 @@ views:
                 cards:
                   - type: markdown
                     content: <ha-icon icon="mdi:thermostat"></ha-icon> Climate Control
-                    style: |
-                      ha-card { 
-                        background: url("/local/google-nest-logo-transparent-png.png");
-                        background-repeat: no-repeat;
-                        background-position: right;
-                        background-size: 15%;
-                        background-color: rgba(0,0,0,0);
-                        font-size: 25px;
-                        box-shadow: none;
-                        margin: 0px 25px 0px 0px;
-                      }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          background: url("/local/google-nest-logo-transparent-png.png");
+                          background-repeat: no-repeat;
+                          background-position: right;
+                          background-size: 15%;
+                          background-color: rgba(0,0,0,0);
+                          font-size: 25px;
+                          box-shadow: none;
+                          margin: 0px 25px 0px 0px;
+                        }
                   - type: custom:simple-thermostat
                     entity: climate.living_room
                     header:
@@ -820,12 +871,13 @@ views:
                     control: false
                     layout:
                       step: row
-                    style: |
-                      ha-card { 
-                        --st-font-size-title: 18px;
-                        background: rgba(10, 10, 10, 0);
-                        box-shadow: none;
-                      }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          --st-font-size-title: 18px;
+                          background: rgba(10, 10, 10, 0);
+                          box-shadow: none;
+                        }
                   - type: custom:simple-thermostat
                     entity: climate.master_bedroom
                     header:
@@ -836,13 +888,14 @@ views:
                     control: false
                     layout:
                       step: row
-                    style: |
-                      ha-card { 
-                        --st-font-size-title: 18px;
-                        background: rgba(10, 10, 10, 0);
-                        box-shadow: none;
-                        margin: 0px 0px 16px 0px; 
-                      }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          --st-font-size-title: 18px;
+                          background: rgba(10, 10, 10, 0);
+                          box-shadow: none;
+                          margin: 0px 0px 16px 0px; 
+                        }
                   - type: custom:simple-thermostat
                     entity: climate.basement
                     header:
@@ -853,13 +906,14 @@ views:
                     control: false
                     layout:
                       step: row
-                    style: |
-                      ha-card { 
-                        --st-font-size-title: 18px;
-                        background: rgba(10, 10, 10, 0);
-                        box-shadow: none;
-                        margin: 0px 0px 30px 0px; 
-                      }
+                    card-mod:
+                      style: |
+                        ha-card { 
+                          --st-font-size-title: 18px;
+                          background: rgba(10, 10, 10, 0);
+                          box-shadow: none;
+                          margin: 0px 0px 30px 0px; 
+                        }
               - type: custom:vertical-stack-in-card
                 cards:
                   - type: horizontal-stack
@@ -870,26 +924,28 @@ views:
                         line_color: white
                         name: Living Rm. Temp
                         animate: true
-                        style: |
-                          ha-card { 
-                            background: rgba(10, 10, 10, 0);
-                            font-size: 20px;
-                            box-shadow: none;
-                            margin: 0px 5px 0px 0px; 
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(10, 10, 10, 0);
+                              font-size: 20px;
+                              box-shadow: none;
+                              margin: 0px 5px 0px 0px; 
+                            }
                       - type: custom:mini-graph-card
                         entities:
                           - sensor.master_bedroom_temperature_round
                         line_color: white
                         name: Bedroom Temp
                         animate: true
-                        style: |
-                          ha-card { 
-                            background: rgba(0, 0, 0, 0);
-                            font-size: 20px;
-                            box-shadow: none;
-                            margin: 0px 0px 0px 5px; 
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0, 0, 0, 0);
+                              font-size: 20px;
+                              box-shadow: none;
+                              margin: 0px 0px 0px 5px; 
+                            }
                   - type: horizontal-stack
                     cards:
                       - type: custom:mini-graph-card
@@ -898,26 +954,28 @@ views:
                         line_color: white
                         name: Basement Temp
                         animate: true
-                        style: |
-                          ha-card { 
-                            background: rgba(0, 0, 0, 0);
-                            font-size: 20px;
-                            box-shadow: none;
-                            margin: 0px 5px 0px 0px; 
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0, 0, 0, 0);
+                              font-size: 20px;
+                              box-shadow: none;
+                              margin: 0px 5px 0px 0px; 
+                            }
                       - type: custom:mini-graph-card
                         entities:
-                          - sensor.office_smartthings_button_temperature
+                          - sensor.office_thermometer_hygrometer_temperature
                         line_color: white
                         name: Office Temp
                         animate: true
-                        style: |
-                          ha-card { 
-                            background: rgba(0, 0, 0, 0);
-                            font-size: 20px;
-                            box-shadow: none;
-                            margin: 0px 0px 0px 5px; 
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0, 0, 0, 0);
+                              font-size: 20px;
+                              box-shadow: none;
+                              margin: 0px 0px 0px 5px; 
+                            }
                   - type: horizontal-stack
                     cards:
                       - type: custom:mini-graph-card
@@ -926,26 +984,28 @@ views:
                         line_color: white
                         name: Outside Front
                         animate: true
-                        style: |
-                          ha-card { 
-                            background: rgba(0, 0, 0, 0);
-                            font-size: 20px;
-                            box-shadow: none;
-                            margin: 0px 5px 0px 0px; 
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0, 0, 0, 0);
+                              font-size: 20px;
+                              box-shadow: none;
+                              margin: 0px 5px 0px 0px; 
+                            }
                       - type: custom:mini-graph-card
                         entities:
                           - sensor.blink_back_temperature
                         line_color: white
                         name: Outside Back
                         animate: true
-                        style: |
-                          ha-card { 
-                            background: rgba(0, 0, 0, 0);
-                            font-size: 20px;
-                            box-shadow: none;
-                            margin: 0px 0px 0px 5px; 
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0, 0, 0, 0);
+                              font-size: 20px;
+                              box-shadow: none;
+                              margin: 0px 0px 0px 5px; 
+                            }
           - type: custom:swipe-card
             parameters:
               effect: coverflow
@@ -954,12 +1014,13 @@ views:
                 cards:
                   - type: markdown
                     content: <ha-icon icon="mdi:shield"></ha-icon> Security
-                    style: |
-                      ha-card {
-                        font-size: 25px;
-                        box-shadow: none;
-                        background: rgba(10, 10, 10, 0);
-                      }
+                    card-mod:
+                      style: |
+                        ha-card {
+                          font-size: 25px;
+                          box-shadow: none;
+                          background: rgba(10, 10, 10, 0);
+                        }
                   - type: custom:stack-in-card
                     mode: horizontal
                     cards:
@@ -984,10 +1045,11 @@ views:
                           - value: unavailable
                             icon: mdi:door
                             color: white
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                            }
                       - type: custom:button-card
                         name: Back
                         entity: binary_sensor.back_door_sensor
@@ -1000,13 +1062,14 @@ views:
                           - value: unavailable
                             icon: mdi:door
                             color: white
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                            }
                       - type: custom:button-card
                         name: Deck
-                        entity: binary_sensor.sengled_deck_door
+                        entity: binary_sensor.deck_door_sensor_open_closed
                         state:
                           - value: 'on'
                             icon: mdi:door-open
@@ -1016,10 +1079,11 @@ views:
                           - value: unavailable
                             icon: mdi:door
                             color: white
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                            }
                       - type: custom:button-card
                         name: Garage
                         entity: binary_sensor.sengled_garage_mandoor
@@ -1032,17 +1096,19 @@ views:
                           - value: unavailable
                             icon: mdi:door
                             color: rgba(0,0,0,0.3)
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                          }
-                    style: |
-                      ha-card {
-                        box-shadow: none;
-                        background: rgba(10, 10, 10, 0);
-                        font-size: 10px;
-                        height: 90px;
-                      }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                            }
+                    card-mod:
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background: rgba(10, 10, 10, 0);
+                          font-size: 10px;
+                          height: 90px;
+                        }
                   - type: custom:stack-in-card
                     mode: horizontal
                     cards:
@@ -1060,11 +1126,12 @@ views:
                             icon: mdi:garage
                           - value: open
                             icon: mdi:garage-open
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                            height: 90px;
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                              height: 90px;
+                            }
                       - type: custom:button-card
                         entity: binary_sensor.garage_door_2_sensor
                         name: Garage Door 2
@@ -1079,28 +1146,31 @@ views:
                             icon: mdi:garage
                           - value: open
                             icon: mdi:garage-open
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                            height: 90px;
-                          }
-                    style: |
-                      ha-card {
-                        box-shadow: none;
-                        background: rgba(10, 10, 10, 0);
-                        font-size: 10px;
-                        height: 90px;
-                      }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                              height: 90px;
+                            }
+                    card-mod:
+                      style: |
+                        ha-card {
+                          box-shadow: none;
+                          background: rgba(10, 10, 10, 0);
+                          font-size: 10px;
+                          height: 90px;
+                        }
               - type: custom:vertical-stack-in-card
                 cards:
                   - type: markdown
                     content: <ha-icon icon="mdi:shield"></ha-icon> Security
-                    style: |
-                      ha-card {
-                        font-size: 25px;
-                        box-shadow: none;
-                        background: rgba(10, 10, 10, 0);
-                      }
+                    card-mod:
+                      style: |
+                        ha-card {
+                          font-size: 25px;
+                          box-shadow: none;
+                          background: rgba(10, 10, 10, 0);
+                        }
                   - type: custom:stack-in-card
                     mode: horizontal
                     cards:
@@ -1114,11 +1184,12 @@ views:
                           - value: disarmed
                             icon: mdi:shield-off
                             color: '#03fcca'
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                            height: 90px;
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                              height: 90px;
+                            }
                       - type: custom:button-card
                         name: Blink
                         entity: alarm_control_panel.blink_home
@@ -1129,8 +1200,9 @@ views:
                           - value: disarmed
                             icon: mdi:shield-off
                             color: '#03fcca'
-                        style: |
-                          ha-card { 
-                            background: rgba(0,0,0,0);
-                            height: 90px;
-                          }
+                        card-mod:
+                          style: |
+                            ha-card { 
+                              background: rgba(0,0,0,0);
+                              height: 90px;
+                            }
