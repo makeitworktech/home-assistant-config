@@ -11,7 +11,7 @@
             cards:
               - type: markdown
                 content: <ha-icon icon="mdi:lightbulb"></ha-icon> Lighting
-                card-mod:
+                card_mod:
                   style: |
                     ha-card { 
                       background: rgba(0,0,0,0);
@@ -28,7 +28,7 @@
                         color: rgba(0,0,0,0.3)
                     icon: mdi:light-recessed
                     name: Can Lights
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card { 
                           background: rgba(0,0,0,0);
@@ -42,7 +42,7 @@
                     state:
                       - value: 'off'
                         color: rgba(0,0,0,0.3)
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card { 
                           background: rgba(0,0,0,0);
@@ -56,12 +56,12 @@
                     state:
                       - value: 'off'
                         color: rgba(0,0,0,0.3)
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card { 
                           background: rgba(0,0,0,0);
                         }
-                card-mod:
+                card_mod:
                   style: |
                     ha-card { 
                       height: 110px;
@@ -79,7 +79,7 @@
                         color: rgba(0,0,0,0.3)
                     icon: mdi:light-switch
                     name: Hallway Light
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card { 
                           background: rgba(0,0,0,0);
@@ -93,7 +93,7 @@
                     state:
                       - value: 'off'
                         color: rgba(0,0,0,0.3)
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card { 
                           background: rgba(0,0,0,0);
@@ -107,18 +107,18 @@
                     state:
                       - value: 'off'
                         color: rgba(0,0,0,0.3)
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card { 
                           background: rgba(0,0,0,0);
                         }
-                card-mod:
+                card_mod:
                   style: |
                     ha-card { 
                       height: 110px;
                       background: rgba(0,0,0,0);
                     }
-            card-mod:
+            card_mod:
               style: |
                 ha-card { 
                   font-size: 25px;
@@ -127,7 +127,7 @@
             cards:
               - type: markdown
                 content: <ha-icon icon="mdi:camera"></ha-icon> Cameras
-                card-mod:
+                card_mod:
                   style: |
                     ha-card { 
                       background: rgba(0,0,0,0);
@@ -138,7 +138,7 @@
                     entity: camera.front_bedroom_camera
                     icon: mdi:video
                     name: Front Bedroom
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card {
                           box-shadow: none;
@@ -149,14 +149,14 @@
                     entity: camera.corner_bedroom_camera
                     icon: mdi:video
                     name: Corner Bedroom
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card {
                           box-shadow: none;
                           background: rgba(10, 10, 10, 0);
                           height: 90px;
                         }
-            card-mod:
+            card_mod:
               style: |
                 ha-card { 
                   font-size: 25px;
@@ -165,7 +165,7 @@
             cards:
               - type: markdown
                 content: <ha-icon icon="mdi:shield"></ha-icon> Security
-                card-mod:
+                card_mod:
                   style: |
                     ha-card {
                       font-size: 25px;
@@ -187,7 +187,7 @@
                       - value: unavailable
                         icon: mdi:door
                         color: rgba(0,0,0,0.3)
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card { 
                           background: rgba(0,0,0,0);
@@ -204,7 +204,7 @@
                       - value: unavailable
                         icon: mdi:door
                         color: rgba(0,0,0,0.3)
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card { 
                           background: rgba(0,0,0,0);
@@ -221,7 +221,7 @@
                       - value: unavailable
                         icon: mdi:door
                         color: rgba(0,0,0,0.3)
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card { 
                           background: rgba(0,0,0,0);
@@ -238,12 +238,12 @@
                       - value: unavailable
                         icon: mdi:door
                         color: rgba(0,0,0,0.3)
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card { 
                           background: rgba(0,0,0,0);
                         }
-                card-mod:
+                card_mod:
                   style: |
                     ha-card {
                       box-shadow: none;
@@ -255,7 +255,7 @@
             cards:
               - type: markdown
                 content: <ha-icon icon="mdi:projector"></ha-icon> Projector
-                card-mod:
+                card_mod:
                   style: |
                     ha-card { 
                       background: rgba(0,0,0,0);
@@ -267,7 +267,7 @@
                     entity: script.projector_setup
                     icon: mdi:projector
                     name: Setup
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card {
                           box-shadow: none;
@@ -278,14 +278,14 @@
                     entity: script.projector_shutdown
                     icon: mdi:projector
                     name: Shutdown
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card {
                           box-shadow: none;
                           background: rgba(10, 10, 10, 0);
                           height: 90px;
                         }
-            card-mod:
+            card_mod:
               style: |
                 ha-card { 
                   font-size: 25px;
@@ -298,7 +298,7 @@
                 cards:
                   - type: markdown
                     content: <ha-icon icon="mdi:baby"></ha-icon> Baby
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card { 
                           background-color: rgba(0,0,0,0);
@@ -314,7 +314,7 @@
                       - value: 'off'
                         icon: mdi:door
                     show_name: false
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card { 
                           background: rgba(0,0,0,0);
@@ -324,7 +324,7 @@
                 cards:
                   - type: markdown
                     content: <ha-icon icon="mdi:robot-vacuum"></ha-icon> Betsy
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card { 
                           background-color: rgba(0,0,0,0);
@@ -333,7 +333,7 @@
                   - type: custom:button-card
                     entity: vacuum.betsy
                     show_name: false
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card { 
                           box-shadow: none;
@@ -346,14 +346,14 @@
                 cards:
                   - type: markdown
                     content: <ha-icon icon="mdi:clock"></ha-icon> Time
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card { 
                           background-color: rgba(0,0,0,0);
                           font-size: 25px;
                         }
                   - type: custom:digital-clock
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card {
                           box-shadow: none;
@@ -365,7 +365,7 @@
             cards:
               - type: markdown
                 content: <ha-icon icon="mdi:amazon-alexa"></ha-icon> Announcements
-                card-mod:
+                card_mod:
                   style: |
                     ha-card { 
                       background: rgba(0,0,0,0);
@@ -383,7 +383,7 @@
                       target: {}
                     icon: mdi:food-fork-drink
                     name: Supper Time
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card { 
                           background: rgba(0,0,0,0);
@@ -399,7 +399,7 @@
                       target: {}
                     icon: mdi:bed
                     name: Bedtime
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card { 
                           background: rgba(0,0,0,0);
@@ -417,7 +417,7 @@
                       target: {}
                     icon: mdi:food
                     name: Lunch Time!
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card { 
                           background: rgba(0,0,0,0);
@@ -433,12 +433,12 @@
                       target: {}
                     icon: mdi:video
                     name: Last Episode
-                    card-mod:
+                    card_mod:
                       style: |
                         ha-card { 
                           background: rgba(0,0,0,0);
                         }
-            card-mod:
+            card_mod:
               style: |
                 ha-card { 
                   font-size: 25px;
@@ -447,7 +447,7 @@
         cards:
           - type: markdown
             content: <ha-icon icon="mdi:thermostat"></ha-icon> Climate Control
-            card-mod:
+            card_mod:
               style: |
                 ha-card { 
                   background: url("/local/google-nest-logo-transparent-png.png");
@@ -469,7 +469,7 @@
             control: false
             layout:
               step: row
-            card-mod:
+            card_mod:
               style: |
                 ha-card { 
                   --st-font-size-title: 18px;
@@ -486,7 +486,7 @@
             control: false
             layout:
               step: row
-            card-mod:
+            card_mod:
               style: |
                 ha-card { 
                   --st-font-size-title: 18px;
@@ -504,7 +504,7 @@
             control: false
             layout:
               step: row
-            card-mod:
+            card_mod:
               style: |
                 ha-card { 
                   --st-font-size-title: 18px;
@@ -520,7 +520,7 @@
                 line_color: white
                 name: Basement Temp
                 animate: true
-                card-mod:
+                card_mod:
                   style: |
                     ha-card { 
                       background: rgba(0, 0, 0, 0);
@@ -534,7 +534,7 @@
                 line_color: white
                 name: Office Temp
                 animate: true
-                card-mod:
+                card_mod:
                   style: |
                     ha-card { 
                       background: rgba(0, 0, 0, 0);
@@ -550,7 +550,7 @@
                 line_color: white
                 name: Guest Room Temp
                 animate: true
-                card-mod:
+                card_mod:
                   style: |
                     ha-card { 
                       background: rgba(0, 0, 0, 0);
@@ -564,7 +564,7 @@
                 line_color: white
                 name: Office Temp
                 animate: true
-                card-mod:
+                card_mod:
                   style: |
                     ha-card { 
                       background: rgba(0, 0, 0, 0);
