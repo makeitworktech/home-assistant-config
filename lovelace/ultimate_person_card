@@ -1,0 +1,259 @@
+type: custom:swipe-card
+parameters:
+  effect: coverflow
+cards:
+  - type: custom:button-card
+    entity: person.aaron
+    aspect_ratio: 4/4
+    show_name: false
+    show_icon: false
+    styles:
+      card:
+        - padding: 4%
+        - background-image: >-
+            [[[if (states["media_player.spotify_yoursgoeshere"].state == "playing")
+            return 'url("/local/Aaron_bitmoji_headphones.png")'; else return
+            'url("/local/Aaron_bitmoji_4.png")'; ]]]
+        - background-size: 90%
+        - background-repeat: no-repeat
+        - background-position: top center
+        - '--keep-background': 'true'
+      custom_fields:
+        location:
+          - position: absolute
+          - left: 4%
+          - top: 4%
+          - color: >-
+              [[[ if (states["person.aaron"].state == "home")  return "#50A14F";
+              if (states["person.aaron"].state == "Work") return "#FFA500"; else
+              return "#e45649"; ]]]
+        battery:
+          - align-self: right
+          - position: absolute
+          - right: 4%
+          - top: 4%
+          - color: >-
+              [[[ if (states["sensor.pixel_7_pro_battery_level"].state <= 30)
+              return "#e45649"; if
+              (states["sensor.pixel_7_pro_battery_level"].state <= 50) return
+              "#ffa229"; else return "#50A14F"; ]]]
+        steps:
+          - align-self: right
+          - position: absolute
+          - left: 4%
+          - right: 4%
+          - top: 4%
+          - color: >-
+              [[[ if (states["sensor.google_fit_steps"].state < 5000) return
+              "#e45649"; else return "#50A14F"; ]]]
+        ringer:
+          - align-self: right
+          - position: absolute
+          - left: 4%
+          - right: 50%
+          - top: 4%
+          - color: >-
+              [[[ if (states["sensor.pixel_7_pro_ringer_mode"].state ==
+              "silent") return "#e45649"; if
+              (states["sensor.pixel_7_pro_ringer_mode"].state == "vibrate")
+              return "#FFA500"; else return "#50A14F"; ]]]
+        bluetooth:
+          - align-self: right
+          - position: absolute
+          - left: 47%
+          - right: 7%
+          - top: 4%
+          - color: >-
+              [[[ if (states["binary_sensor.pixel_7_pro_bluetooth_state"].state
+              == "on") return "#52adff"; else return "#e45649"; ]]]
+        media:
+          - align-self: right
+          - position: absolute
+          - bottom: 4%
+          - right: 4%
+          - left: 4%
+          - color: >-
+              [[[if (states["media_player.spotify_ajstew444"].state ==
+              "playing") return "#000000"; else return "#ffffff00"; ]]]
+    custom_fields:
+      location: |
+        [[[
+          if (states["person.aaron"].state == "home")
+            return `<ha-icon
+              icon="mdi:home"
+              style="width: 22px; height: 22px;">
+              </ha-icon>`
+          if (states["person.aaron"].state == "Work")
+            return `<ha-icon
+              icon="mdi:office-building"
+              style="width: 22px; height: 22px;">
+              </ha-icon>`
+          else 
+            return `<ha-icon
+              icon="mdi:home-export-outline"
+              style="width: 22px; height: 22px;">
+              </ha-icon>`
+        ]]]
+      battery: |
+        [[[
+          return `<ha-icon
+            icon="mdi:battery"
+            style="width: 20px; height: 20px;"></ha-icon
+            <span>${states['sensor.pixel_7_pro_battery_level'].state}%</span>`
+        ]]]
+      steps: |
+        [[[
+          return `<ha-icon
+            icon="mdi:shoe-formal"
+            style="width: 25px; height: 25px;"></ha-icon
+            <span> ${states['sensor.google_fit_steps'].state}</span>`
+        ]]]
+      ringer: |
+        [[[
+          if (states["sensor.pixel_7_pro_ringer_mode"].state == "silent")
+            return `<ha-icon
+              icon="mdi:cellphone-off"
+              style="width: 22px; height: 22px;">
+              </ha-icon>`
+          if (states["sensor.pixel_7_pro_ringer_mode"].state == "vibrate")
+            return `<ha-icon
+              icon="mdi:vibrate"
+              style="width: 22px; height: 22px;">
+              </ha-icon>`
+          else 
+            return `<ha-icon
+              icon="mdi:cellphone"
+              style="width: 22px; height: 22px;">
+              </ha-icon>
+              <span> ${states['sensor.pixel_7_pro_volume_level_ringer'].state}</span>`
+        ]]]
+      bluetooth: |
+        [[[
+          if (states["binary_sensor.pixel_7_pro_bluetooth_state"].state == "on")
+            return `<ha-icon
+              icon="mdi:bluetooth"
+              style="width: 22px; height: 22px;">
+              </ha-icon>`
+          else 
+            return `<ha-icon
+              icon="mdi:bluetooth-off"
+              style="width: 22px; height: 22px;">
+              </ha-icon>`
+        ]]]
+      media: |
+        [[[
+          return `<marquee> <ha-icon
+            icon="mdi:music"
+            style="width: 20px; height: 20px;"></ha-icon
+            <span> ${states['media_player.spotify_ajstew444'].attributes.media_title}
+            - ${states['media_player.spotify_ajstew444'].attributes.media_artist} </marquee>`
+        ]]]
+  - type: custom:stack-in-card
+    mode: vertical
+    cards:
+      - type: custom:button-card
+        entity: person.aaron
+        aspect_ratio: 4/2.85
+        show_name: false
+        show_icon: false
+        styles:
+          card:
+            - padding: 4%
+          custom_fields:
+            name:
+              - font-size: 30px;
+              - position: absolute
+              - left: 4%
+              - top: 4%
+              - color: '#000000'
+            location:
+              - position: absolute
+              - left: 4%
+              - top: 20%
+              - color: '#000000'
+            battery:
+              - align-self: left
+              - position: absolute
+              - left: 4%
+              - top: 30%
+              - color: '#000000'
+            steps:
+              - align-self: left
+              - position: absolute
+              - left: 4%
+              - top: 40%
+              - color: '#000000'
+            cals:
+              - align-self: left
+              - position: absolute
+              - left: 4%
+              - top: 50%
+              - color: '#000000'
+        custom_fields:
+          name: |
+            [[[ return '<span> Aaron </span>'
+            ]]]
+          location: |
+            [[[
+              if (states["device_tracker.pixel_7_pro"].state == "not_home")
+                return `<ha-icon
+                  icon="mdi:home-export-outline"
+                  style="width: 22px; height: 22px;">
+                  </ha-icon>
+                  <span>Location: Not Home</span>`
+              if (states["device_tracker.pixel_7_pro"].state == "Work")
+                return `<ha-icon
+                  icon="mdi:office-building"
+                  style="width: 22px; height: 22px;">
+                  </ha-icon>
+                  <span>Location: Work</span>`
+              else 
+                return `<ha-icon
+                  icon="mdi:home"
+                  style="width: 22px; height: 22px;">
+                  </ha-icon>
+                  <span>Location: Home</span>`
+            ]]]
+          battery: |
+            [[[
+              return `<ha-icon
+                icon="mdi:battery"
+                style="width: 20px; height: 20px;"></ha-icon>
+                <span>Battery: ${states['sensor.pixel_7_pro_battery_level'].state}% - ${states['sensor.pixel_7_pro_battery_state'].state}</span>`
+            ]]]
+          steps: |
+            [[[
+              return `<ha-icon
+                icon="mdi:shoe-formal"
+                style="width: 20px; height: 20px;"></ha-icon
+                <span> Steps: ${states['sensor.google_fit_steps'].state} / 10000</span>`
+            ]]]
+          cals: |
+            [[[
+              return `<ha-icon
+                icon="mdi:food-apple"
+                style="width: 20px; height: 20px;"></ha-icon
+                <span> Calories: ${states['sensor.calories_in'].state} / ${states['input_number.calorie_goal'].state}</span>`
+            ]]]
+        card_mod:
+          style: |
+            ha-card { 
+              background-color: rgba(0,0,0,0);
+              box-shadow: none;
+            }
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.google_fit_steps
+        hours_to_show: 48
+        graph: line
+        show:
+          state: false
+          name: false
+          icon: false
+        points_per_hour: 1
+        card_mod:
+          style: |
+            ha-card { 
+              background-color: rgba(0,0,0,0);
+              box-shadow: none;
+            }
