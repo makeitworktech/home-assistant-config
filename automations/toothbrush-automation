@@ -1,0 +1,56 @@
+alias: "TEST - Toothbrush Automation "
+description: ""
+trigger:
+  - platform: state
+    entity_id:
+      - sensor.aaron_s_oral_b_toothbrush
+    to: running
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 5
+condition: []
+action:
+  - service: light.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.wled_bathroom_vanity
+  - service: select.select_option
+    metadata: {}
+    data:
+      option: Percent
+    target:
+      entity_id: select.wled_bathroom_vanity_preset
+  - service: number.set_value
+    metadata: {}
+    data:
+      value: "100"
+    target:
+      entity_id: number.wled_bathroom_vanity_intensity
+  - repeat:
+      count: 50
+      sequence:
+        - delay:
+            hours: 0
+            minutes: 0
+            seconds: 2
+            milliseconds: 400
+        - service: number.set_value
+          metadata: {}
+          data:
+            value: "{{ states('number.wled_bathroom_vanity_intensity') | int - 2 }}"
+          target:
+            entity_id: number.wled_bathroom_vanity_intensity
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 10
+      milliseconds: 0
+  - service: select.select_option
+    metadata: {}
+    data:
+      option: White
+    target:
+      entity_id: select.wled_bathroom_vanity_preset
+mode: single
